@@ -18,16 +18,24 @@ end
 
 #SHOW
 get '/countries/:id' do
+  @country = Country.find(params['id'])
+  erb(:'countries/show')
 end
 
 #EDIT
 get '/countries/:id/edit' do
+  @country = Country.find(params['id'])
+  erb(:'countries/edit')
 end
 
 #UPDATE
 put '/countries/:id' do
+  @country = Country.update(params)
+  redirect to("/countries/#{params['id']}")
 end
 
 #DELETE
-delete '/countries' do
+delete '/countries/:id' do
+  Country.destroy(params['id'])
+  redirect to('/countries')
 end

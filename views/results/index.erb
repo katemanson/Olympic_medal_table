@@ -3,7 +3,7 @@
 </div>
 <div>
   <% @results.each do |result| %>
-    Event: <%= result.event_id %><br>
+    <a href="/results/<%= result.id %>">Event: <%= result.event_id %><br>
     Entrant: <%= result.participant_id %><br>
     Result: <% case result.result
             when 1 %>
@@ -13,7 +13,8 @@
             <% when 3 %>
               Bronze<br>
             <% end %>
-  <hr>
+    <hr>
+    </a>
   <% end %>
 </div>
 <p></p>

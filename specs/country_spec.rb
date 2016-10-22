@@ -1,7 +1,9 @@
 require('minitest/autorun')
 require('minitest/rg')
 require('pry-byebug')
-require_relative ('../models/country.rb')
+require_relative('../models/country.rb')
+require_relative('../models/participant.rb')
+require_relative('../db/sql_runner.rb')
 
 class TestCountry < Minitest::Test
 

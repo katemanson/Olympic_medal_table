@@ -21,6 +21,20 @@ class Event
     return result
   end
 
+  def self.update(options)
+    sql = "UPDATE events SET
+          name = '#{options['name']}',
+          sport = '#{options['sport']}'
+          WHERE id = #{options['id']}"
+    SqlRunner.run(sql)
+  end
+
+  def self.find(id)
+    sql = "SELECT * FROM events WHERE id = #{id}"
+    result = Event.map_item(sql)
+    return result
+  end
+
   def self.map_items(sql)
     events = SqlRunner.run(sql)
     result = events.map { |event| Event.new(event) }
@@ -30,6 +44,11 @@ class Event
   def self.map_item(sql)
     result = Event.map_items(sql).first
     return result
+  end
+
+  def self.destroy(id)
+    sql = "DELETE FROM events WHERE id = #{id}"
+    SqlRunner.run(sql)
   end
 
 end

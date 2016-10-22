@@ -4,7 +4,7 @@
 
 <div>
   <% @countries.each do |country| %>
-  <%= country.name %><br>
+  <a href="/countries/<%= country.id %>"><%= country.name %></a><br>
   <% end %> 
 </div>
 <p></p>

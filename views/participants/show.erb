@@ -1,0 +1,12 @@
+<div>
+  <h3> <%= @participant.name %> </h3>
+  <a href="/countries/<%= @participant.country.id %>"><h4> <%= @participant.country.name %> </h4></a>
+  Events | Results
+</div>
+<div>
+  <p><a href="/participants/<%= @participant.id %>/edit">Edit</a></p>
+  <p><form action="/participants/<%= @participant.id %>" method="post">
+    <input type="submit" value="Delete">
+    <input type="hidden" name="_method" value="delete">
+  </form></p>
+</div>

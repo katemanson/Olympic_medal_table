@@ -20,16 +20,26 @@ end
 
 # SHOW
 get '/results/:id' do
+  @result = Result.find(params['id'])
+  erb(:'results/show')
 end
 
 # EDIT
 get '/results/:id/edit' do
+  @result = Result.find(params['id'])
+  @events = Event.all()
+  @participants = Participant.all()
+  erb(:'results/edit')
 end
 
 # UPDATE
 put '/results/:id' do
+  @result = Result.update(params)
+  redirect to("/results/#{params['id']}")
 end
 
 # DELETE
-delete '/results' do
+delete '/results/:id' do
+  Result.destroy(params['id'])
+  redirect to('/results')
 end

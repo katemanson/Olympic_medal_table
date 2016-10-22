@@ -1,3 +1,4 @@
+require('pry-byebug')
 require_relative('./sql_runner.rb')
 require_relative('../models/country.rb')
 require_relative('../models/participant.rb')
@@ -359,3 +360,6 @@ result42.save()
 result43.save()
 result44.save()
 result45.save()
+
+binding.pry
+nil

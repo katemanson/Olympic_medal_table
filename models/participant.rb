@@ -15,4 +15,20 @@ class Participant
     @id = participant['id'].to_i
   end
 
+  def self.all()
+    sql = "SELECT * FROM participants"
+    result = Participant.map_items(sql)
+    return result
+  end
+
+  def self.map_items(sql)
+    participants = SqlRunner.run(sql)
+    result = participants.map { |participant| Participant.new(participant) }
+    return result
+  end
+
+  def self.map_item(sql)
+    result = Participant.map_items(sql).first
+    return result
+  end
 end

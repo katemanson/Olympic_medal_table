@@ -15,4 +15,21 @@ class Event
     @id = event['id'].to_i
   end
 
+  def self.all()
+    sql = "SELECT * FROM events"
+    result = Event.map_items(sql)
+    return result
+  end
+
+  def self.map_items(sql)
+    events = SqlRunner.run(sql)
+    result = events.map { |event| Event.new(event) }
+    return result
+  end
+
+  def self.map_item(sql)
+    result = Event.map_items(sql).first
+    return result
+  end
+
 end

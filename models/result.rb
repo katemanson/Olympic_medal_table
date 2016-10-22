@@ -16,4 +16,21 @@ class Result
     @id = result['id'].to_i
   end
 
+  def self.all()
+    sql = "SELECT * FROM results"
+    result = Result.map_items(sql)
+    return result
+  end
+
+  def self.map_items(sql)
+    results = SqlRunner.run(sql)
+    result = results.map { |result| Result.new(result) }
+    return result
+  end
+
+  def self.map_item(sql)
+    result = Result.map_items(sql).first
+    return result
+  end
+
 end

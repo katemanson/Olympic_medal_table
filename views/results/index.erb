@@ -1,0 +1,22 @@
+<div>
+  <h2>Results</h2>
+</div>
+<div>
+  <% @results.each do |result| %>
+    Event: <%= result.event_id %><br>
+    Entrant: <%= result.participant_id %><br>
+    Result: <% case result.result
+            when 1 %>
+              Gold<br>
+            <% when 2 %>
+              Silver<br>
+            <% when 3 %>
+              Bronze<br>
+            <% end %>
+  <hr>
+  <% end %>
+</div>
+<p></p>
+<div>
+  <a href="/results/new">Add result</a>
+</div>

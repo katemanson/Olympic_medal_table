@@ -91,17 +91,21 @@ class Country
       [-points, -medals, name]
     end
 
-    rank_order_indexed = rank_order.map.with_index.to_h
-    # idea from: http://stackoverflow.com/questions/6242311/get-index-of-array-element-faster-than-on
+    raw_ranking = rank_order.map.with_index do |country_data, index|
+      [country_data[0], index + 1]
+    end
 
-    ranking = (rank_order_indexed.map do |country_ranking_criteria, index| 
-      [country = country_ranking_criteria[0], index + 1] 
-    end).to_h
+    final_ranking = [raw_ranking[0]]
 
-    return ranking
+    raw_ranking.each_cons(2) { |previous, current| 
+        if (previous[0].total_ranking_points + previous[0].total_number_of_medals) == (current[0].total_ranking_points + current[0].total_number_of_medals)
+          final_ranking << [current[0], previous[1]]
+        else
+          final_ranking << current
+        end }
+
+    return final_ranking
   end
-
-
 
   def self.find(id)
     sql = "SELECT * FROM countries where id = #{id}"

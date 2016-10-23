@@ -63,3 +63,20 @@ end).to_h
 #  [#<Country:0x007fb380e6a420 @id=3, @name="Norway">, 6, 0, 2, 0, "Norway"]=>9,
 #  [#<Country:0x007fb380e69fc0 @id=10, @name="Switzerland">, 3, 0, 1, 0, "Switzerland"]=>10,
 #  [#<Country:0x007fb380e6a560 @id=1, @name="Russia">, 1, 0, 0, 1, "Russia"]=>11}
+
+raw_ranking = rank_order.map.with_index { |country_data, index| [country_data[0], index + 1] }
+
+final_ranking = [raw_ranking[0]]
+
+raw_ranking.each_cons(2) { |previous, current| 
+    if (previous[0].total_ranking_points + previous[0].total_number_of_medals) == (current[0].total_ranking_points + current[0].total_number_of_medals)
+      final_ranking << [current[0], previous[1]]
+    else
+      final_ranking << current
+    end
+
+return final_ranking
+
+
+
+}

@@ -12,8 +12,8 @@ class Result
 
   def save()
     sql = "INSERT INTO results (participant_id, event_id, result) VALUES (#{@participant_id}, #{@event_id}, #{@result}) RETURNING *"
-    result = SqlRunner.run(sql).first
-    @id = result['id'].to_i
+    outcome = SqlRunner.run(sql).first
+    @id = outcome['id'].to_i
   end
 
   def event()
@@ -21,8 +21,8 @@ class Result
           INNER JOIN results r
           ON r.event_id = e.id
           WHERE r.id = #{@id}"
-    result = Event.map_item(sql)
-    return result
+    outcome = Event.map_item(sql)
+    return outcome
   end
 
   def participant()
@@ -30,14 +30,14 @@ class Result
           INNER JOIN results r
           ON r.participant_id = p.id
           WHERE r.id = #{@id}"
-    result = Participant.map_item(sql)
-    return result        
+    outcome = Participant.map_item(sql)
+    return outcome
   end
 
   def self.all()
     sql = "SELECT * FROM results"
-    result = Result.map_items(sql)
-    return result
+    outcome = Result.map_items(sql)
+    return outcome
   end
 
   def self.update(options)
@@ -51,19 +51,19 @@ class Result
 
   def self.find(id)
     sql = "SELECT * FROM results WHERE id = #{id}"
-    result = Result.map_item(sql)
-    return result
+    outcome = Result.map_item(sql)
+    return outcome
   end
 
   def self.map_items(sql)
     results = SqlRunner.run(sql)
-    result = results.map { |result| Result.new(result) }
-    return result
+    outcome = results.map { |result| Result.new(result) }
+    return outcome
   end
 
   def self.map_item(sql)
-    result = Result.map_items(sql).first
-    return result
+    outcome = Result.map_items(sql).first
+    return outcome
   end
 
   def self.destroy(id)

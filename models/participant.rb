@@ -24,7 +24,7 @@ class Participant
     return country
   end
 
-  def result()
+  def results()
     sql = "SELECT r.* FROM results r
           WHERE r.participant_id = #{@id}"
     result = Result.map_items(sql)

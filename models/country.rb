@@ -79,26 +79,29 @@ class Country
   def self.rank_all()
     countries = Country.all()
 
-    countries_medals_array = countries.map do |country|
-        [country, 
-        country.total_ranking_points, 
-        country.number_of_golds, 
-        country.number_of_silvers, 
-        country.number_of_bronzes, 
-        country.name]
-      end
+    ranking_criteria = countries.map do |country|
+      [country, 
+      country.total_ranking_points, 
+      country.total_number_of_medals, 
+      country.name]
+    end
 
-    rank_order__raw = countries_medals_array.sort_by do
-        |country, points, golds, silvers, bronzes, name| 
-        [-points, -golds, -silvers, -bronzes, name]
-      end
+    rank_order = ranking_criteria.sort_by do
+      |country, points, medals, name| 
+      [-points, -medals, name]
+    end
 
-    rank_order__hash = rank_order__raw.map.with_index.to_h
-    # kind of based on: http://stackoverflow.com/questions/6242311/get-index-of-array-element-faster-than-on
+    rank_order_indexed = rank_order.map.with_index.to_h
+    # idea from: http://stackoverflow.com/questions/6242311/get-index-of-array-element-faster-than-on
 
-    countries_ranking = Hash[rank_order__hash.map { |key, value| [key[0], value + 1] }]
-    return countries_ranking
+    ranking = (rank_order_indexed.map do |country_ranking_criteria, index| 
+      [country = country_ranking_criteria[0], index + 1] 
+    end).to_h
+
+    return ranking
   end
+
+
 
   def self.find(id)
     sql = "SELECT * FROM countries where id = #{id}"

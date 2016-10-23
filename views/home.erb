@@ -12,6 +12,7 @@
         <th scope="col">Silver</th>
         <th scope="col">Bronze</th>
         <th scope="col">Total</th>
+        <th scope="col">Points</th>
       </tr>
     </thead>
     <tbody>
@@ -24,6 +25,7 @@
         <td><%= country.number_of_silvers %></td>
         <td><%= country.number_of_bronzes %></td>
         <td><%= country.total_number_of_medals %></td>
+        <td><%= country.total_ranking_points %></td>
       </tr>
       <% end %>
     </tbody>
@@ -35,6 +37,7 @@
         <td><%= Result.number_of_silvers %></td>
         <td><%= Result.number_of_bronzes %></td>
         <td><%= Result.total_number_of_medals %></td>
+        <td></td>
       </tr>
     </tfoot>
   </table>

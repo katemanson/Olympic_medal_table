@@ -1,39 +1,65 @@
-# Where points are equal, decide country ranking by
-# comparing number of golds; the country with more golds gets the higher ranking (lower number)
-# then (if number of golds equal) comparing silvers
-# then (if number of silvers equal) comparing bronzes
-# else (if number of bronzes equal) 
-  # give all countries the same rank (with '=')
-  # count on to assign rank to countries with next-lowest points total(s)
+# Comparing values with <=>
+# 'Australia' <=> 'Austria' => -1
+# so 'Australia' 'is less than' 'Austria', i.e. comes before it in ordered list
 
-def self.rank_all()
-  
-  countries = Country.all()
-  # array of Country objects
+# For non-equally ranked countries, rank number:
+(index + 1).to_s
+# index + 1, as string
 
-  # create an array of arrays, with Country objects, points totals, medal numbers
-  countries_medals_array = countries.map { |country| [country, country.total_ranking_points, country.number_of_golds, country.number_of_silvers, country.number_of_bronzes, country.name] }
+# For an equally ranked country alphabetically first in group:
+(index + 1).to_s + '='
+# index + 1, as string, followed by =
 
-  # order according to points totals, then where these are equal by logic: compare by number golds, silvers, bronzes in succession, then alphabetically by name
-  countries_rank_order__raw = countries_medals_array.sort_by { |country, points, golds, silvers, bronzes, name| [-points, -golds, -silvers, -bronzes, name] }
+# For = country alphabetically second in group:
+  index.to_s + '='
+# index, as string, followed by =
 
-  
+# For = country third in group:
+  (index - 1).to_s + '='
+# and so on...
 
-  # hash replacing points totals with rank numbers; to include = symbols and 'skips' for equal rankings
+# So rank number for = countries is 
+  i + 2 - p, where i = index, p = position in group of equal countries (starts with p = 1)
 
+# ? Ways to show equal ranking?
+# - identify countries with same points and medals; compare on name; set ranking order/rank number accordingly, taking into account that there may be > 2 countries involved; then find these countries in overall order and apply the rank number settings established; 
+# - set 'base' ranking numbers as variables, use simliar approach to above, plug into table
+# - nested comparison of countries in hash, if statement to deal with each case (loop for equal countries)
 
+# From http://stackoverflow.com/questions/25042260/convert-sorted-ruby-array-to-ranks-with-possible-repeats, answer from Iceman:
+# a = [89, 52, 52, 36, 18, 18, 5]
+# a.map{ |e| a.index(e) + 1 }
+# # => [1, 2, 2, 4, 5, 5, 7]
+could use this approach, by changing criteria to rank by points, then by overall number of medals (get Korea and Norway then also equal)
 
-  
-  countries_reverse_order__array = countries.sort_by! { |country| country.total_ranking_points }
-  
-  countries_rank_order__array = countries_reverse_order__array.reverse
-  
-  countries_with_rank_order__hash = countries_rank_order__array.map.with_index.to_h
-  # kind of based on: http://stackoverflow.com/questions/6242311/get-index-of-array-element-faster-than-on
-  
-  countries_with_ranking = Hash[countries_with_rank_order__hash.map { |key, value| [key, value + 1] }]
-  
-  return countries_with_ranking
+rank = index + 1
+unless current country matches points and medals of previous country
+  in which case, rank = rank of previous country
 
-end
+# rank_order_indexed is a(n ordered) hash with key being an array of [Country object, points, golds, silvers, bronzes, name] and value being the index of the key-value pair
+ranking = (rank_order_indexed.map do |country_ranking_criteria, index| 
+  [
+    country = country_ranking_criteria[0], 
 
+    rank_order_indexed.inject(0) do |previous, current| 
+      if previous.key[1] == current.key[1] && previous.key[2] == current.key[2] && previous.key[3] == current.key[3] && previous.key[4] == current.key[4]
+        rank = previous.value
+      else
+        rank = index + 1
+      end
+    end
+  ]
+end).to_h
+
+# {[#<Country:0x007fb380e6a100 @id=8, @name="France">, 29, 5, 0, 4, "France"]=>0,
+#  [#<Country:0x007fb380e6a060 @id=9, @name="Sweden">, 21, 3, 2, 0, "Sweden"]=>1,
+#  [#<Country:0x007fb380e69f20 @id=11, @name="China">, 21, 1, 4, 4, "China"]=>2,
+#  [#<Country:0x007fb380e6a240 @id=6, @name="Germany">, 11, 1, 2, 0, "Germany"]=>3,
+#  [#<Country:0x007fb380e6a4c0 @id=2, @name="United States">, 11, 1, 1, 3, "United States"]=>4,
+#  [#<Country:0x007fb380e6a380 @id=4, @name="Australia">, 9, 1, 1, 1, "Australia"]=>5,
+#  [#<Country:0x007fb380e6a1a0 @id=7, @name="Austria">, 9, 1, 1, 1, "Austria"]=>6,
+#  [#<Country:0x007fb380e6a2e0 @id=5, @name="Netherlands">, 8, 1, 1, 0, "Netherlands"]=>7,
+#  [#<Country:0x007fb380e69e80 @id=12, @name="Korea">, 6, 1, 0, 1, "Korea"]=>8,
+#  [#<Country:0x007fb380e6a420 @id=3, @name="Norway">, 6, 0, 2, 0, "Norway"]=>9,
+#  [#<Country:0x007fb380e69fc0 @id=10, @name="Switzerland">, 3, 0, 1, 0, "Switzerland"]=>10,
+#  [#<Country:0x007fb380e6a560 @id=1, @name="Russia">, 1, 0, 0, 1, "Russia"]=>11}

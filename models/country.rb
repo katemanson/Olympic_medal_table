@@ -78,12 +78,26 @@ class Country
 
   def self.rank_all()
     countries = Country.all()
-    countries_reverse_order__array = countries.sort_by! { |country| country.total_ranking_points }
-    countries_rank_order__array = countries_reverse_order__array.reverse
-    countries_with_rank_order__hash = countries_rank_order__array.map.with_index.to_h
+
+    countries_medals_array = countries.map do |country|
+        [country, 
+        country.total_ranking_points, 
+        country.number_of_golds, 
+        country.number_of_silvers, 
+        country.number_of_bronzes, 
+        country.name]
+      end
+
+    rank_order__raw = countries_medals_array.sort_by do
+        |country, points, golds, silvers, bronzes, name| 
+        [-points, -golds, -silvers, -bronzes, name]
+      end
+
+    rank_order__hash = rank_order__raw.map.with_index.to_h
     # kind of based on: http://stackoverflow.com/questions/6242311/get-index-of-array-element-faster-than-on
-    countries_with_ranking = Hash[countries_with_rank_order__hash.map { |key, value| [key, value + 1] }]
-    return countries_with_ranking
+
+    countries_ranking = Hash[rank_order__hash.map { |key, value| [key[0], value + 1] }]
+    return countries_ranking
   end
 
   def self.find(id)

@@ -9,7 +9,7 @@ require_relative('../models/result.rb')
 russia1 = Country.new({'name' => "Russia"})
 united_states2 = Country.new({'name' => "United States"})
 norway3 = Country.new({'name' => "Norway"})
-canada4 = Country.new({'name' => "Canada"})
+australia4 = Country.new({'name' => "Australia"})
 netherlands5 = Country.new({'name' => "Netherlands"})
 germany6 = Country.new({'name' => "Germany"})
 austria7 = Country.new({'name' => "Austria"})
@@ -22,7 +22,7 @@ korea12 = Country.new({'name' => "Korea"})
 russia1.save
 united_states2.save
 norway3.save
-canada4.save
+australia4.save
 netherlands5.save
 germany6.save
 austria7.save

@@ -254,6 +254,7 @@ tbody td {
 
 tfoot td {
   padding: 20px;
+  font-weight: bold;
 }
 
 th, 
@@ -264,6 +265,11 @@ td {
 th:first-child,
 td:first-child {
   text-align: left;
+}
+
+th:nth-child(2),
+td:nth-child(2) {
+  text-align:left;
   border-right: 1px solid lightgrey;
 }
 
@@ -272,3 +278,7 @@ td:last-child {
   border-left: 1px solid lightgrey;
 }
 
+tfoot td:nth-child(2) {
+  text-align: right;
+  font-weight: bold
+}

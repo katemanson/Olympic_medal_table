@@ -7,6 +7,7 @@
     <thead>
       <tr>
         <th scope="col"></th>
+        <th scope="col"></th>
         <th scope="col">Gold</th>
         <th scope="col">Silver</th>
         <th scope="col">Bronze</th>
@@ -14,28 +15,26 @@
       </tr>
     </thead>
     <tbody>
+      <% ranking = Country.rank_all %>
+      <% ranking.each do |country, rank| %>
       <tr>
-        <td>Country</td>
-        <td>Gold</td>
-        <td>Silver</td>
-        <td>Bronze</td>
-        <td>Total</td>
+        <td><%= rank %></td>
+        <td><%= country.name %></td>
+        <td><%= country.number_of_golds %></td>
+        <td><%= country.number_of_silvers %></td>
+        <td><%= country.number_of_bronzes %></td>
+        <td><%= country.total_number_of_medals %></td>
       </tr>
-      <tr>
-        <td>Country</td>
-        <td>Gold</td>
-        <td>Silver</td>
-        <td>Bronze</td>
-        <td>Total</td>
-      </tr>
+      <% end %>
     </tbody>
     <tfoot>
       <tr>
+        <td></td>
         <td>Totals</td>
-        <td>Gold</td>
-        <td>Silver</td>
-        <td>Bronze</td>
-        <td>Total total</td>
+        <td><%= Result.number_of_golds %></td>
+        <td><%= Result.number_of_silvers %></td>
+        <td><%= Result.number_of_bronzes %></td>
+        <td><%= Result.total_number_of_medals %></td>
       </tr>
     </tfoot>
   </table>

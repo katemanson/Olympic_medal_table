@@ -40,6 +40,41 @@ class Result
     return outcome
   end
 
+  def self.golds()
+    results = Result.all()
+    gold_results = results.select { |result| result.result == 1 }
+    return gold_results
+  end
+
+  def self.number_of_golds()
+    return golds.count
+  end
+
+  def self.silvers()
+    results = Result.all()
+    silver_results = results.select { |result| result.result == 2 }
+    return silver_results
+  end
+
+  def self.number_of_silvers()
+    return silvers.count
+  end
+
+  def self.bronzes()
+    results = Result.all()
+    bronze_results = results.select { |result| result.result == 3 }
+    return bronze_results
+  end
+
+  def self.number_of_bronzes()
+    return bronzes.count
+  end
+
+  def self.total_number_of_medals
+    total_number_of_medals = Result.number_of_golds + Result.number_of_silvers + Result.number_of_bronzes
+    return total_number_of_medals
+  end
+
   def self.update(options)
     sql = "UPDATE results SET
           participant_id = #{options['participant_id']},

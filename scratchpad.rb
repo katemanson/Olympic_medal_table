@@ -73,7 +73,7 @@ raw_ranking.each_cons(2) { |previous, current|
       final_ranking << [current[0], previous[1]]
     else
       final_ranking << current
-    end
+    end }
 
 return final_ranking
 

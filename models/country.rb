@@ -31,6 +31,22 @@ class Country
     return results
   end
 
+  def show_results()
+    for result in results
+      puts "#{result.event.sport}: #{result.event.name}"
+      puts "Participant: #{result.participant.name}"
+      print "Final position: #{result.result}    "
+        case result.result
+        when 1
+          puts "Gold"
+        when 2
+          puts "Silver"
+        when 3
+          puts "Bronze"
+        end
+    end
+  end
+
   def golds()
       gold_results = results.select { |result| result.result == 1 }
       return gold_results
@@ -99,9 +115,11 @@ class Country
 
     raw_ranking.each_cons(2) { |previous, current| 
         if (previous[0].total_ranking_points + previous[0].total_number_of_medals) == (current[0].total_ranking_points + current[0].total_number_of_medals)
-          final_ranking << [current[0], previous[1]]
+          final_ranking.delete_at(-1)
+          final_ranking << [previous[0], previous[1].to_s + '=']
+          final_ranking << [current[0], previous[1].to_s + '=']
         else
-          final_ranking << current
+          final_ranking << [current[0],current[1].to_s]
         end }
 
     return final_ranking

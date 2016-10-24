@@ -22,6 +22,14 @@ get '/countries/:id' do
   erb(:'countries/show')
 end
 
+#SHOW JSON RESULTS
+get '/countries/:id/results' do
+  content_type(:json)
+  country = Country.find(params['id'])
+  results = country.results
+  return results.to_json
+end
+
 #EDIT
 get '/countries/:id/edit' do
   @country = Country.find(params['id'])

@@ -1,0 +1,11 @@
+<div>
+  <h2>Sports</h2>
+</div>
+<div>
+  <% @sports.each do |sport| %>
+  <a href="/sports/<%= sport.id %>"><%= sport.name %></a><br>
+  <% end %>
+</div>
+<div>
+  <a href="/sports/new">Add sport</a>
+</div>

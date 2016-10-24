@@ -3,44 +3,22 @@
 </div>
 <div>
   <form action="/events/<%= @event.id %>" method="post">
-    
     <p>
-    <label for="sport">Sport: </label><br>
-
-    <select name="sport" id="sport">
-    
-      <option value="Alpine skiing" <%= "selected" if @event.sport == "Alpine skiing" %>>Alpine skiing</option>
-      <option value="Biathlon" <%= "selected" if @event.sport == "Biathlon" %>>Biathlon</option>
-      <option value="Bobsleigh" <%= "selected" if @event.sport == "Bobsleigh" %>>Bobsleigh</option>
-      <option value="Cross-country skiing" <%= "selected" if @event.sport == "Cross-country" %>>Cross-country skiing</option>
-      <option value="Curling" <%= "selected" if @event.sport == "Curling" %>>Curling</option>
-      <option value="Figure skating" <%= "selected" if @event.sport == "Figure skating" %>>Figure skating</option>
-      <option value="Freestyle skiing" <%= "selected" if @event.sport == "Freestyle" %>>Freestyle skiing</option>
-      <option value="Ice hockey" <%= "selected" if @event.sport == "Ice hockey" %>>Ice hockey</option>
-      <option value="Luge" <%= "selected" if @event.sport == "Luge" %>>Luge</option>
-      <option value="Nordic combined" <%= "selected" if @event.sport == "Nordic combined" %>>Nordic combined</option>
-      <option value="Short track speed skating" <%= "selected" if @event.sport == "Short track speed skating" %>>Short track speed skating</option>
-      <option value="Skeleton" <%= "selected" if @event.sport == "Skeleton" %>>Skeleton</option>
-      <option value="Ski jumping" <%= "selected" if @event.sport == "Ski jumping" %>>Ski jumping</option>
-      <option value="Snowboarding" <%= "selected" if @event.sport == "Snowboarding" %>>Snowboarding</option>
-      <option value="Speed skating" <%= "selected" if @event.sport == "Speed skating" %>>Speed skating</option>
-      <option value="Falling with style" <%= "selected" if @event.sport == "Falling with style" %>>Falling with style</option>
-      <option value="Sliding with style" <%= "selected" if @event.sport == "Sliding with style" %>>Sliding with style</option>
-      <option value="Sliding faster than anyone else; try to avoid falling" <%= "selected" if @event.sport == "Sliding faster than anyone else, try to avoid falling" %>>Sliding faster than anyone else, try to avoid falling</option>
-      <option value="Scoring more points than anyone else, while sliding; falling optional" <%= "selected" if @event.sport == "Scoring more points than anyone else, while sliding; falling optional" %>>Scoring more points than anyone else, while sliding; falling optional</option>
-    
-    </select>
+      <label for="sport">Sport: </label><br>
+      <select name="sport_id" id="sport">
+        <% @sports.each do |sport| %>
+          <option value="<%= sport.id %>" <%= "selected" if @event.sport.id == sport.id %>><%= @event.sport.name %>
+          </option>
+        <% end %>    
+      </select>
     </p>
-
     <p>
-    <label for="name">Event name: </label><br>
-    <input type="text" name="name" id="name" value="<%= @event.name %>"><br>
+      <label for="name">Event name: </label><br>
+      <input type="text" name="name" id="name" value="<%= @event.name %>"><br>
     </p>
-
     <p>
-    <input type="hidden" name="_method" value="put">
-    <input type="submit" value="Save">
+      <input type="hidden" name="_method" value="put">
+      <input type="submit" value="Save">
     </p>
-
   </form>
 </div>

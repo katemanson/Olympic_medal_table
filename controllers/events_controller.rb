@@ -6,6 +6,7 @@ end
 
 # NEW
 get '/events/new' do
+  @sports = Sport.all()
   erb(:'events/new')
 end
 
@@ -25,6 +26,7 @@ end
 # EDIT
 get '/events/:id/edit' do
   @event = Event.find(params['id'])
+  @sports = Sport.all()
   erb(:'events/edit')
 end
 

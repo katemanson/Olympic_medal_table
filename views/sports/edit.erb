@@ -1,0 +1,15 @@
+<div>
+  <h3>Edit sport</h3>
+</div>
+<div>
+  <form action="/sports/<%= @sport.id %>" method="post">
+    <p>
+      <label for="name">Sport: </label><br>
+      <input type="text" name="name" id="name" value="<%= @sport.name %>"><br>
+    </p>
+    <p>
+      <input type="hidden" name="_method" value="put">
+      <input type="submit" value="Save">
+    </p>
+  </form>
+</div>

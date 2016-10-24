@@ -1,0 +1,11 @@
+<div>
+  <h3> <%= @sport.name %> </h3>
+  Countries | Participants | Results
+</div>
+<div>
+  <p><a href="/sports/<%= @sport.id %>/edit">Edit</a></p>
+  <p><form action="/sports/<%= @sport.id %>" method="post">
+    <input type="submit" value="Delete">
+    <input type="hidden" name="_method"  value="delete">
+  </form></p>
+</div>

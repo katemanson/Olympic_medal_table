@@ -14,48 +14,81 @@ class Country
     @id = country['id'].to_i
   end
 
-  def participants()
-    sql = "SELECT p.* FROM participants p
-          INNER JOIN countries c ON c.id = p.country_id
-          WHERE c.id = #{@id}"
-    participants = Participant.map_items(sql)
-    return participants
+  def competitors()
+    sql = "SELECT c.* FROM competitors c
+          INNER JOIN countries ON countries.id = c.country_id
+          WHERE countries.id = #{@id}"
+    competitors = Competitor.map_items(sql)
+    return competitors
   end
 
-  def results()
-    sql = "SELECT r.* FROM results r
-          INNER JOIN participants p ON p.id = r.participant_id
-          INNER JOIN countries c ON c.id = p.country_id
-          WHERE c.id = #{@id}"
-    results = Result.map_items(sql)
-    return results
+  def entries()
+    sql = "SELECT e.* FROM entries e
+          INNER JOIN competitors c ON c.id = e.competitor_id
+          INNER JOIN countries ON countries.id = c.country_id
+          WHERE countries.id = #{@id}"
+    entries = Entry.map_items(sql)
+    return entries
   end
 
-  def show_results()
-    all_results = results.map do |result|
+  def entries_data()
+    all_entries_data = entries.map do |entry|
       {
-        sport: result.event.sport, 
-        event: result.event.name,
-        participant: result.participant.name, 
-        final_position: result.result,
-        medal: case result.result
-        when 1
-          "Gold"
-        when 2
-          "Silver"
-        when 3
-          "Bronze"
-        else
-          "no"
-        end
+        sport: entry.event.sport, 
+        event: entry.event.name,
+        competitor: entry.competitor.name, 
+        final_position: 
+          if entry.result == nil
+            "Not determined"
+          else
+            entry.result
+          end,
+        medal:  case entry.result
+                when 1
+                  "Gold"
+                when 2
+                  "Silver"
+                when 3
+                  "Bronze"
+                else
+                  "None"
+                end
       }
     end
-    return all_results
+    return all_entries_data
+  end
+
+  def results_data()
+    all_results = entries.select { |entry| entry.result != nil }
+    all_results_data = all_results.map do |result|
+      {
+        sport: entry.event.sport, 
+        event: entry.event.name,
+        competitor: entry.competitor.name, 
+        final_position: 
+          if entry.result == nil
+            "Not determined"
+          else
+            entry.result
+          end,
+        medal:  case entry.result
+                when 1
+                  "Gold"
+                when 2
+                  "Silver"
+                when 3
+                  "Bronze"
+                else
+                  "None"
+                end
+      }
+    end
+    return all_results_data
   end
 
   def golds()
-      gold_results = results.select { |result| result.result == 1 }
-      return gold_results
+      entries_with_gold_result = entries.select { |entry| entry.result == 1 }
+      return entries_with_gold_result
   end
 
   def number_of_golds()
@@ -63,8 +96,8 @@ class Country
   end
 
   def silvers()
-    silver_results = results.select { |result| result.result == 2 }
-    return silver_results
+    entries_with_silver_result = entries.select { |entry| entry.result == 2 }
+    return entries_with_silver_result
   end
 
   def number_of_silvers()
@@ -72,8 +105,8 @@ class Country
   end
 
   def bronzes()
-    bronze_results = results.select { |result| result.result == 3 }
-    return bronze_results
+    entries_with_bronze_result = entries.select { |entry| entry.result == 3 }
+    return entries_with_bronze_result
   end
 
   def number_of_bronzes()

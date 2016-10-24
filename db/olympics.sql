@@ -1,28 +1,35 @@
-DROP TABLE IF EXISTS results;
-DROP TABLE IF EXISTS participants;
-DROP TABLE IF EXISTS countries;
+DROP TABLE IF EXISTS entries;
+DROP TABLE IF EXISTS competitors;
 DROP TABLE IF EXISTS events;
+DROP TABLE IF EXISTS sports;
+DROP TABLE IF EXISTS countries;
 
 CREATE TABLE countries(
   id SERIAL2 PRIMARY KEY,
   name VARCHAR(255)
 );
 
-CREATE TABLE participants(
+CREATE TABLE sports(
   id SERIAL2 PRIMARY KEY,
-  country_id INT2 REFERENCES countries(id) ON DELETE CASCADE,
   name VARCHAR(255)
 );
 
 CREATE TABLE events(
   id SERIAL2 PRIMARY KEY,
   name VARCHAR(255),
-  sport VARCHAR(255)
+  sport_id INT2 REFERENCES sports(id) ON DELETE CASCADE
 );
 
-CREATE TABLE results(
+CREATE TABLE competitors(
   id SERIAL2 PRIMARY KEY,
-  participant_id INT2 REFERENCES participants(id) ON DELETE CASCADE,
+  country_id INT2 REFERENCES countries(id) ON DELETE CASCADE,
+  sport_id INT2 REFERENCES sports(id) ON DELETE CASCADE,
+  name VARCHAR(255)
+);
+
+CREATE TABLE entries(
+  id SERIAL2 PRIMARY KEY,
+  competitor_id INT2 REFERENCES competitors(id) ON DELETE CASCADE,
   event_id INT2 REFERENCES events(id) ON DELETE CASCADE,
   result INT2
 );

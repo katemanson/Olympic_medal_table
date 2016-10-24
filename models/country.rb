@@ -33,18 +33,22 @@ class Country
 
   def show_results()
     all_results = results.map do |result|
-      ["Sport: #{result.event.sport}", 
-      "Event: #{result.event.name}",
-      "Participant: #{result.participant.name}", 
-      "Final position: #{result.result.to_s}",
-      case result.result
-      when 1
-        "Gold"
-      when 2
-        "Silver"
-      when 3
-        "Bronze"
-      end]
+      {
+        sport: result.event.sport, 
+        event: result.event.name,
+        participant: result.participant.name, 
+        final_position: result.result,
+        medal: case result.result
+        when 1
+          "Gold"
+        when 2
+          "Silver"
+        when 3
+          "Bronze"
+        else
+          "no"
+        end
+      }
     end
     return all_results
   end
@@ -115,14 +119,15 @@ class Country
 
     final_ranking = [raw_ranking[0]]
 
-    raw_ranking.each_cons(2) { |previous, current| 
-        if (previous[0].total_ranking_points + previous[0].total_number_of_medals) == (current[0].total_ranking_points + current[0].total_number_of_medals)
-          final_ranking.delete_at(-1)
-          final_ranking << [previous[0], previous[1].to_s + '=']
-          final_ranking << [current[0], previous[1].to_s + '=']
-        else
-          final_ranking << [current[0],current[1].to_s]
-        end }
+    raw_ranking.each_cons(2) do |previous, current| 
+      if (previous[0].total_ranking_points + previous[0].total_number_of_medals) == (current[0].total_ranking_points + current[0].total_number_of_medals)
+        final_ranking.delete_at(-1)
+        final_ranking << [previous[0], previous[1].to_s + '=']
+        final_ranking << [current[0], previous[1].to_s + '=']
+      else
+        final_ranking << [current[0],current[1].to_s]
+      end
+    end
 
     return final_ranking
   end

@@ -241,7 +241,7 @@ template {
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
 
 /* ________________________________________________________ */
-.medaltable table {
+table {
   border-collapse: collapse;
 }
 
@@ -301,10 +301,6 @@ template {
 .medaltable tfoot td:nth-child(2) {
   text-align: right;
   font-weight: bold
-}
-
-.resultstable table {
-  border-collapse: collapse;
 }
 
 .resultstable caption {

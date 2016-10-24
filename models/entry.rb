@@ -7,7 +7,7 @@ class Entry
     @id = nil || options['id'].to_i
     @competitor_id = options['competitor_id'].to_i
     @event_id = options['event_id'].to_i
-    @result = 0 || options['result'].to_i
+    @result = nil || options['result'].to_i
   end
 
   def save()

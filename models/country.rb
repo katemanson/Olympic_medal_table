@@ -23,9 +23,9 @@ class Country
   end
 
   def entries()
-    sql = "SELECT e.* FROM entries e
-          INNER JOIN competitors c ON c.id = e.competitor_id
-          INNER JOIN countries ON countries.id = c.country_id
+    sql = "SELECT entries.* FROM entries 
+          INNER JOIN competitors ON competitors.id = entries.competitor_id
+          INNER JOIN countries ON countries.id = competitors.country_id
           WHERE countries.id = #{@id}"
     entries = Entry.map_items(sql)
     return entries
@@ -153,7 +153,7 @@ class Country
     final_ranking = [raw_ranking[0]]
 
     raw_ranking.each_cons(2) do |previous, current| 
-      if (previous[0].total_ranking_points + previous[0].total_number_of_medals) == (current[0].total_ranking_points + current[0].total_number_of_medals)
+      if (previous[0].total_ranking_points == current[0].total_ranking_points) && (previous[0].total_number_of_medals == current[0].total_number_of_medals)
         final_ranking.delete_at(-1)
         final_ranking << [previous[0], previous[1].to_s + '=']
         final_ranking << [current[0], previous[1].to_s + '=']

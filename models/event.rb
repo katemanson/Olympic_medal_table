@@ -15,6 +15,15 @@ class Event
     @id = event['id'].to_i
   end
 
+  def results
+    sql = "SELECT r.* FROM results r
+          INNER JOIN events e 
+          ON e.id = r.event_id
+          WHERE id = #{options['id']}"
+    result = Result.map_items(sql)
+    return result
+  end
+
   def self.all()
     sql = "SELECT * FROM events"
     result = Event.map_items(sql)

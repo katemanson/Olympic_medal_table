@@ -2,9 +2,19 @@
   <h2>Results</h2>
 </div>
 <div>
-  <% @results.each do |result| %>
-    <a href="/results/<%= result.id %>">Event: <%= result.event_id %><br>
-    Entrant: <%= result.participant_id %><br>
+  <a href="/results/new">Add result</a>
+  <p></p>
+</div>
+<div>
+  <% @events.each do |event| %>
+    <%= event.sport %>: <%= event.name %><br>
+    Entrant: 
+
+
+
+
+
+    <%= result.participant_id %><br>
     Result: <% case result.result
             when 1 %>
               Gold<br>
@@ -18,6 +28,3 @@
   <% end %>
 </div>
 <p></p>
-<div>
-  <a href="/results/new">Add result</a>
-</div>

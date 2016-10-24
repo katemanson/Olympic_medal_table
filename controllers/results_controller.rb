@@ -1,6 +1,6 @@
 # INDEX
 get '/results' do
-  @results = Result.all()
+  @events = Event.all()
   erb(:'results/index')
 end
 

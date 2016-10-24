@@ -26,7 +26,7 @@ end
 get '/countries/:id/results' do
   content_type(:json)
   country = Country.find(params['id'])
-  results = country.results
+  results = country.show_results
   return results.to_json
 end
 

@@ -32,19 +32,21 @@ class Country
   end
 
   def show_results()
-    for result in results
-      puts "#{result.event.sport}: #{result.event.name}"
-      puts "Participant: #{result.participant.name}"
-      print "Final position: #{result.result}    "
-        case result.result
-        when 1
-          puts "Gold"
-        when 2
-          puts "Silver"
-        when 3
-          puts "Bronze"
-        end
+    all_results = results.map do |result|
+      ["Sport: #{result.event.sport}", 
+      "Event: #{result.event.name}",
+      "Participant: #{result.participant.name}", 
+      "Final position: #{result.result.to_s}",
+      case result.result
+      when 1
+        "Gold"
+      when 2
+        "Silver"
+      when 3
+        "Bronze"
+      end]
     end
+    return all_results
   end
 
   def golds()

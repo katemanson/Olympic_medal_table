@@ -17,12 +17,23 @@ class Entry
   end
 
   def event()
-    sql = "SELECT e.* FROM events e 
+    sql = "SELECT events.* FROM events  
           INNER JOIN entries
-          ON entries.event_id = e.id
+          ON entries.event_id = events.id
           WHERE entries.id = #{@id}"
-    outcome = Event.map_item(sql)
-    return outcome
+    result = Event.map_item(sql)
+    return result
+  end
+
+  def sport()
+    sql = "SELECT sports.* FROM sports 
+          INNER JOIN events 
+          ON events.sport_id = sports.id 
+          INNER JOIN entries 
+          ON entries.event_id = events.id 
+          WHERE entries.id = #{@id}"
+    result = Sport.map_item(sql)
+    return result
   end
 
   def competitor()
@@ -36,8 +47,8 @@ class Entry
 
   def self.all()
     sql = "SELECT * FROM entries"
-    outcome = Entry.map_items(sql)
-    return outcome
+    result = Entry.map_items(sql)
+    return result
   end
 
   def self.all_golds()

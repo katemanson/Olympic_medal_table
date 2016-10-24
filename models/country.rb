@@ -60,17 +60,12 @@ class Country
 
   def results_data()
     all_results = entries.select { |entry| entry.result != nil }
-    all_results_data = all_results.map do |result|
+    all_results_data = all_results.map do |entry|
       {
-        sport: entry.event.sport, 
+        sport: entry.sport.name, 
         event: entry.event.name,
         competitor: entry.competitor.name, 
-        final_position: 
-          if entry.result == nil
-            "Not determined"
-          else
-            entry.result
-          end,
+        final_position: entry.result,
         medal:  case entry.result
                 when 1
                   "Gold"

@@ -15,13 +15,42 @@ class Event
     @id = event['id'].to_i
   end
 
+  def participants()
+    sql = "SELECT p.* FROM participants p 
+          INNER JOIN results r 
+          ON p.id = r.participant_id 
+          INNER JOIN events e 
+          ON r.event_id = e.id 
+          WHERE e.id = #{@id}"
+    result = Result.map_items(sql)
+    return result
+  end
+
   def results
     sql = "SELECT r.* FROM results r
           INNER JOIN events e 
           ON e.id = r.event_id
-          WHERE id = #{options['id']}"
+          WHERE e.id = #{@id}"
     result = Result.map_items(sql)
     return result
+  end
+
+  def gold_medallist
+    gold_result = results.find { |result| result.result == 1 }
+    gold_medallist = Participant.find(gold_result.participant_id)
+    return gold_medallist
+  end
+
+  def silver_medallist
+    silver_result = results.find { |result| result.result == 2 }
+    silver_medallist = Participant.find(silver_result.participant_id)
+    return silver_medallist
+  end
+
+  def bronze_medallist
+    bronze_result = results.find { |result| result.result == 3 }
+    bronze_medallist = Participant.find(bronze_result.participant_id)
+    return bronze_medallist
   end
 
   def self.all()

@@ -7,24 +7,25 @@
 </div>
 <div>
   <% @events.each do |event| %>
-    <%= event.sport %>: <%= event.name %><br>
-    Entrant: 
-
-
-
-
-
-    <%= result.participant_id %><br>
-    Result: <% case result.result
-            when 1 %>
-              Gold<br>
-            <% when 2 %>
-              Silver<br>
-            <% when 3 %>
-              Bronze<br>
-            <% end %>
-    <hr>
-    </a>
+    <p><b><%= event.sport %>: <%= event.name %></b></p>
+      <table class="resultstable">
+        <tbody>
+          <tr>
+            <td><b>Gold</b></td>
+            <td><%= event.gold_medallist.name %></td>
+            <td><%= event.gold_medallist.country.name %></td>
+          </tr>
+          <tr>
+            <td><b>Silver</b></td>
+            <td><%= event.silver_medallist.name %></td>
+            <td><%= event.silver_medallist.country.name %></td>
+          </tr>
+          <tr>
+            <td><b>Bronze</b></td>
+            <td><%= event.bronze_medallist.name %></td>
+            <td><%= event.bronze_medallist.country.name %></td>
+          </tr>
+        </tbody>
+      </table>
   <% end %>
 </div>
-<p></p>

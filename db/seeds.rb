@@ -364,6 +364,8 @@ result45.save()
 # germany6.participants
 # Participant.bronze_medallists
 # Country.rank_all
+# event1.gold_medallist
+
 
 binding.pry
 nil

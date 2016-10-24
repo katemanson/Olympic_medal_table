@@ -1,3 +1,12 @@
+event.results
+=> array of Result objects, each with id, athlete_id, event_id, result
+
+to get a particular Result object by attribute,
+array.find { |element| element.include?(value) }
+
+
+
+
 # Comparing values with <=>
 # 'Australia' <=> 'Austria' => -1
 # so 'Australia' 'is less than' 'Austria', i.e. comes before it in ordered list
@@ -79,4 +88,3 @@ return final_ranking
 
 
 
-}

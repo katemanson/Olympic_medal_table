@@ -241,12 +241,11 @@ template {
 /*! normalize.css v5.0.0 | MIT License | github.com/necolas/normalize.css */
 
 /* ________________________________________________________ */
-
-table {
+.medaltable table {
   border-collapse: collapse;
 }
 
-caption {
+.medaltable caption {
   display: table-caption;
   caption-side: bottom;
   text-align: left;
@@ -257,49 +256,72 @@ caption {
   padding-right: 5px;
 }
 
-thead th {
+.medaltable thead th {
   border-bottom: 2px solid lightgrey;
   padding: 20px;
 }
 
-tbody td {
-  border-bottom: 1px solid lightgrey;
+.medaltable tbody td {
+  border-top: 1px solid lightgrey;
   padding: 20px;
 }
 
-tfoot td {
+.medaltable tfoot td {
   border-top: 2px solid lightgrey;
   padding: 20px;
   font-weight: bold;
 }
 
-th, 
-td {
+.medaltable th, 
+.medaltable td {
   text-align: center;
 }
 
-th:first-child,
-td:first-child {
+.medaltable th:first-child,
+.medaltable td:first-child {
   text-align: left;
 }
 
-th:nth-child(2),
-td:nth-child(2) {
+.medaltable th:nth-child(2),
+.medaltable td:nth-child(2) {
   text-align:left;
   border-right: 2px solid lightgrey;
 }
 
-th:nth-child(6),
-td:nth-child(6) {
+.medaltable th:nth-child(6),
+.medaltable td:nth-child(6) {
   border-left: 1px solid lightgrey;
 }
 
-th:last-child,
-td:last-child {
+.medaltable th:last-child,
+.medaltable td:last-child {
   border-left: 2px solid lightgrey;
 }
 
-tfoot td:nth-child(2) {
+.medaltable tfoot td:nth-child(2) {
   text-align: right;
   font-weight: bold
+}
+
+.resultstable table {
+  border-collapse: collapse;
+}
+
+.resultstable caption {
+  display: table-caption;
+  caption-side: bottom;
+  text-align: left;
+  font-size: 0.85em;
+  padding-top: 20px;
+  padding-bottom: 5px;
+  padding-left: 5px;
+  padding-right: 5px;
+}
+
+.resultstable td {
+  text-align: left;
+  padding-top: 10px;
+  padding-bottom: 10px;
+  padding-left: 0px;
+  padding-right: 30px;
 }

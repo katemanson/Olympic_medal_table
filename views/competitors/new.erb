@@ -1,26 +1,29 @@
 <div>
-  <h3>Add participant</h3>
+  <h3>Add competitor</h3>
 </div>
 <div>
-  <form action="/participants" method="post">
-    
+  <form action="/competitors" method="post">
     <p>
-    <label for="country">Country: </label>
-    <select name="country_id" id="country">
-      <% @countries.each do |country| %>
-        <option value="<%= country.id %>"><%= country.name %></option>
-      <% end %>
-    </select>
+      <label for="country">Country: </label>
+      <select name="country_id" id="country">
+        <% @countries.each do |country| %>
+          <option value="<%= country.id %>"><%= country.name %></option>
+        <% end %>
+      </select>
     </p>
-
     <p>
-    <label for="name">Participant name: </label>
-    <input type="text" name="name" id="name">
+      <label for="sport">Sport: </label>
+      <select name="sport_id" id="sport">
+        <% @sports.each do |sport| %>
+          <option value="<%= sport.id %>"><%= sport.name %></option>
+        <% end %>
+      </select>
+    </p>    <p>
+      <label for="name">Competitor name: </label>
+      <input type="text" name="name" id="name">
     </p>
-
     <p>
-    <input type="submit" value="Add">
+      <input type="submit" value="Add">
     </p>
-
   </form>
 </div>

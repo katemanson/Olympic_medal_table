@@ -1,27 +1,27 @@
 <div>
-  <h3>Edit result</h3>
+  <h3>Edit entry/ result</h3>
 </div>
 <div>
-  <form action="/results/<%= @result.id %>" method="post">
+  <form action="/entries/<%= @entry.id %>" method="post">
     <p>
       <label for="event">Event: </label><br>
       <select name="event_id" id="event">
         <% @events.each do |event| %>
-          <option value="<%= event.id %>" <%= "selected" if @result.event_id == event.id %>><%= event.sport %>: <%= event.name %></option>
+          <option value="<%= event.id %>" <%= "selected" if @entry.event_id == event.id %>><%= event.sport %>: <%= event.name %></option>
         <% end %>
       </select>
     </p>
     <p>
-      <label for="participant">Participant: </label><br>
-      <select name="participant_id" id="participant">
-        <% @participants.each do |participant| %>
-          <option value="<%= participant.id %>" <%= "selected" if @result.participant_id == participant.id %>><%= participant.name %></option>
+      <label for="competitor">Competitor: </label><br>
+      <select name="competitor_id" id="competitor">
+        <% @competitors.each do |competitor| %>
+          <option value="<%= competitor.id %>" <%= "selected" if @entry.competitor_id == competitor.id %>><%= competitor.name %></option>
         <% end %>
       </select>
     </p>
     <p>
       <label for="result">Result (final position): </label><br>
-      <input type="number" name="result" id="result" value="<%= @result.result %>">
+      <input type="number" name="result" id="result" value="<%= @entry.result %>">
     </p>
     <p>
       <input type="hidden" name="_method" value="put">

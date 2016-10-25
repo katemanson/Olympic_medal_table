@@ -2,11 +2,23 @@
   <h2>Competitors</h2>
 </div>
 <div>
-  <% @competitors.each do |competitor| %>
-  <a href="/competitors/<%= competitor.id %>"><%= competitor.name %></a><br>
-  <% end %>
+  <p>
+    <form action="/competitors/new" method="get">
+      <input type="submit" value="Add competitor">
+    </form>
+    <hr>
+  </p>
 </div>
-<p></p>
 <div>
-  <a href="/competitors/new">Add competitor</a>
+  <p>
+    <% @competitors.each do |competitor| %>
+      <b>Name: </b><a href="/competitors/<%= competitor.id %>"><%= competitor.name %></a><br>
+      <b>Country: </b><%= competitor.country.name %><br>
+      <b>Sport: </b><%= competitor.sport.name %><br>
+  </p>
+  <p>
+      <a href="/competitors/<%= competitor.id %>/edit">Edit competitor</a>
+  </p>
+      <hr>
+    <% end %>
 </div>

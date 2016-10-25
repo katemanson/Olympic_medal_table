@@ -7,6 +7,7 @@ end
 # NEW
 get '/competitors/new' do
   @countries = Country.all()
+  @sports = Sport.all()
   erb(:'competitors/new')
 end
 
@@ -14,7 +15,7 @@ end
 post '/competitors' do
   @competitor = Competitor.new(params)
   @competitor.save
-  redirect to('/competitors') # or erb(:'competitors/create')?
+  redirect to('/competitors')
 end
 
 # SHOW

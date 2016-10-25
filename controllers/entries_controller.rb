@@ -28,7 +28,7 @@ end
 get '/entries/:id/edit' do
   @entry = Entry.find(params['id'])
   @events = Event.all()
-  @participants = Participant.all()
+  @competitors = Competitor.all()
   erb(:'entries/edit')
 end
 

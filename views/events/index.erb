@@ -1,11 +1,18 @@
+<h2>
+  Events
+</h2>
 <div>
-  <h2>Events</h2>
+  <p>
+    <form action="/events/new" method="get">
+      <input type="submit" value="Add event">
+    </form>
+    <hr>
+  </p>
 </div>
 <div>
   <% @events.each do |event| %>
-  <a href="/events/<%= event.id %>"><%= event.sport.name %>: <%= event.name %></a><br>
+    <p>
+      <a href="/events/<%= event.id %>"><%= event.sport.name %>: <%= event.name %></a>
+    </p>
   <% end %>
-</div>
-<div>
-  <a href="/events/new">Add event</a>
 </div>

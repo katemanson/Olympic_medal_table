@@ -1,5 +1,8 @@
 <h3>
-  <%= @sport.name %>: events
+  <%= @sport.name %>
+</h3>
+<h3>
+  Events
 </h3>
 <div>
   <p>
@@ -17,11 +20,11 @@
         <a href="/events/<%= event.id %>"><%= event.name %></a>
       </h3>
       <p>
-        <a href="/events/<%= event.id %>/edit">Edit event record</a>
+        <a href="/events/<%= event.id %>/edit">Edit event</a>
       </p>
       <p>
         <form action="/events/<%= event.id %>" method="post">
-          <input type="submit" value="Delete all records">
+          <input type="submit" value="Delete event">
           <input type="hidden" name="_method" value="delete">
         </form>
       </p>

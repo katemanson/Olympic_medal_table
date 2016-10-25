@@ -1,27 +1,31 @@
 <div>
-  <h3>Edit participant</h3>
+  <h3>Edit competitor</h3>
 </div>
 <div>
-  <form action="/participants/<%= @participant.id %>" method="post">
-    
+  <form action="/competitors/<%= @competitor.id %>" method="post">
     <p>
-    <label for="country">Country: </label>
-    <select name="country_id" id="country">
-      <% @countries.each do |country| %>
-        <option value="<%= country.id %>" <%= "selected" if @participant.country_id == country.id %>><%= country.name %></option>
-      <% end %>
-    </select>
+      <label for="country">Country: </label>
+      <select name="country_id" id="country">
+        <% @countries.each do |country| %>
+          <option value="<%= country.id %>" <%= "selected" if @competitor.country_id == country.id %>><%= country.name %></option>
+        <% end %>
+      </select>
     </p>
-
     <p>
-    <label for="name">Participant name: </label>
-    <input type="text" name="name" id="name" value="<%= @participant.name %>">
+      <label for="sport">Sport: </label>
+      <select name="sport_id" id="sport">
+        <% @sports.each do |sport| %>
+          <option value="<%= sport.id %>" <%= "selected" if @competitor.sport_id == sport.id %>><%= sport.name %></option>
+        <% end %>
+      </select>
     </p>
-
     <p>
-    <input type="hidden" name="_method" value="put">
-    <input type="submit" value="Save">
+      <label for="name">Competitor name: </label>
+      <input type="text" name="name" id="name" value="<%= @competitor.name %>">
     </p>
-
+    <p>
+      <input type="hidden" name="_method" value="put">
+      <input type="submit" value="Save">
+    </p>
   </form>
 </div>

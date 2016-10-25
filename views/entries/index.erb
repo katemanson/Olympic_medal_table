@@ -1,31 +1,9 @@
 <div>
-  <h2>Results</h2>
+  <h2>Entries</h2>
 </div>
 <div>
-  <a href="/results/new">Add result</a>
+  <a href="/entries/new">Add entry</a>
   <p></p>
 </div>
 <div>
-  <% @events.each do |event| %>
-    <p><b><%= event.sport %>: <%= event.name %></b></p>
-      <table class="resultstable">
-        <tbody>
-          <tr>
-            <td><b>Gold</b></td>
-            <td><%= event.gold_medallist.name %></td>
-            <td><%= event.gold_medallist.country.name %></td>
-          </tr>
-          <tr>
-            <td><b>Silver</b></td>
-            <td><%= event.silver_medallist.name %></td>
-            <td><%= event.silver_medallist.country.name %></td>
-          </tr>
-          <tr>
-            <td><b>Bronze</b></td>
-            <td><%= event.bronze_medallist.name %></td>
-            <td><%= event.bronze_medallist.country.name %></td>
-          </tr>
-        </tbody>
-      </table>
-  <% end %>
 </div>

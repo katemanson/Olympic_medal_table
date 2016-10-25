@@ -17,7 +17,7 @@ class Event
 
   def sport()
     sql = "SELECT sports.* FROM sports 
-          WHERE sports.id = #{options['sport_id']}"
+          WHERE sports.id = #{@sport_id}"
     result = Sport.map_item(sql)
     return result
   end

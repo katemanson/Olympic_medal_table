@@ -1,11 +1,11 @@
 <div>
-  <h3> <%= @participant.name %> </h3>
-  <a href="/countries/<%= @participant.country.id %>"><h4> <%= @participant.country.name %> </h4></a>
+  <h3> <%= @competitor.name %> </h3>
+  <a href="/countries/<%= @competitor.country.id %>"><h4> <%= @competitor.country.name %> </h4></a>
   Events | Results
 </div>
 <div>
-  <p><a href="/participants/<%= @participant.id %>/edit">Edit</a></p>
-  <p><form action="/participants/<%= @participant.id %>" method="post">
+  <p><a href="/competitors/<%= @competitor.id %>/edit">Edit</a></p>
+  <p><form action="/competitors/<%= @competitor.id %>" method="post">
     <input type="submit" value="Delete">
     <input type="hidden" name="_method" value="delete">
   </form></p>

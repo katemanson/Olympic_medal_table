@@ -1,43 +1,44 @@
 # INDEX
-get '/participants' do
-  @participants = Participant.all()
-  erb(:'participants/index')
+get '/competitors' do
+  @competitors = Competitor.all()
+  erb(:'competitors/index')
 end
 
 # NEW
-get '/participants/new' do
+get '/competitors/new' do
   @countries = Country.all()
-  erb(:'participants/new')
+  erb(:'competitors/new')
 end
 
 # CREATE
-post '/participants' do
-  @participant = Participant.new(params)
-  @participant.save
-  redirect to('/participants') # or erb(:'participants/create')?
+post '/competitors' do
+  @competitor = Competitor.new(params)
+  @competitor.save
+  redirect to('/competitors') # or erb(:'competitors/create')?
 end
 
 # SHOW
-get '/participants/:id' do
-  @participant = Participant.find(params['id'])
-  erb(:'participants/show')
+get '/competitors/:id' do
+  @competitor = Competitor.find(params['id'])
+  erb(:'competitors/show')
 end
 
 # EDIT
-get '/participants/:id/edit' do
-  @participant = Participant.find(params['id'])
+get '/competitors/:id/edit' do
+  @competitor = Competitor.find(params['id'])
   @countries = Country.all()
-  erb(:'participants/edit')
+  @sports = Sport.all()
+  erb(:'competitors/edit')
 end
 
 # UPDATE
-put '/participants/:id' do
-  @participant = Participant.update(params)
-  redirect to("/participants/#{params['id']}")
+put '/competitors/:id' do
+  @competitor = Competitor.update(params)
+  redirect to("/competitors/#{params['id']}")
 end
 
 # DELETE
-delete '/participants/:id' do
-  Participant.destroy(params['id'])
-  redirect to('/participants')
+delete '/competitors/:id' do
+  Competitor.destroy(params['id'])
+  redirect to('/competitors')
 end

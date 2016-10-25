@@ -1,12 +1,12 @@
 <div>
-  <h2>Participants</h2>
+  <h2>Competitors</h2>
 </div>
 <div>
-  <% @participants.each do |participant| %>
-  <a href="/participants/<%= participant.id %>"><%= participant.name %></a><br>
+  <% @competitors.each do |competitor| %>
+  <a href="/competitors/<%= competitor.id %>"><%= competitor.name %></a><br>
   <% end %>
 </div>
 <p></p>
 <div>
-  <a href="/participants/new">Add participant</a>
+  <a href="/competitors/new">Add competitor</a>
 </div>

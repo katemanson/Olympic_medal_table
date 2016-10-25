@@ -1,3 +1,29 @@
+!!LIST ENTRIES!!
+<!--   <% @events.each do |event| %>
+    <p><b><%= event.sport.name %>: <%= event.name %></b></p>
+      <table class="resultstable">
+        <tbody>
+          <tr>
+            <td><b>Gold</b></td>
+            <td><%= event.gold_medallist.name %></td>
+            <td><%= event.gold_medallist.country.name %></td>
+          </tr>
+          <tr>
+            <td><b>Silver</b></td>
+            <td><%= event.silver_medallist.name %></td>
+            <td><%= event.silver_medallist.country.name %></td>
+          </tr>
+          <tr>
+            <td><b>Bronze</b></td>
+            <td><%= event.bronze_medallist.name %></td>
+            <td><%= event.bronze_medallist.country.name %></td>
+          </tr>
+        </tbody>
+      </table>
+  <% end %> -->
+
+
+
 event.results
 => array of Result objects, each with id, athlete_id, event_id, result
 

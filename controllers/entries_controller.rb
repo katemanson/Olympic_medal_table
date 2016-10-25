@@ -1,45 +1,45 @@
 # INDEX
-get '/results' do
+get '/entries' do
   @events = Event.all()
-  erb(:'results/index')
+  erb(:'entries/index')
 end
 
 # NEW
-get '/results/new' do
+get '/entries/new' do
   @events = Event.all()
-  @participants = Participant.all()
-  erb(:'results/new')
+  @competitors = Competitor.all()
+  erb(:'entries/new')
 end
 
 # CREATE
-post '/results' do
-  @result = Result.new(params)
-  @result.save
-  redirect to('/results') # or erb(:'participants/create')?
+post '/entries' do
+  @entry = Entry.new(params)
+  @entry.save
+  redirect to('/entries') # or erb(:'participants/create')?
 end
 
 # SHOW
-get '/results/:id' do
-  @result = Result.find(params['id'])
-  erb(:'results/show')
+get '/entries/:id' do
+  @entry = Entry.find(params['id'])
+  erb(:'entries/show')
 end
 
 # EDIT
-get '/results/:id/edit' do
-  @result = Result.find(params['id'])
+get '/entries/:id/edit' do
+  @entry = Entry.find(params['id'])
   @events = Event.all()
   @participants = Participant.all()
-  erb(:'results/edit')
+  erb(:'entries/edit')
 end
 
 # UPDATE
-put '/results/:id' do
-  @result = Result.update(params)
-  redirect to("/results/#{params['id']}")
+put '/entries/:id' do
+  @entry = Entry.update(params)
+  redirect to("/entries/#{params['id']}")
 end
 
 # DELETE
-delete '/results/:id' do
+delete '/entries/:id' do
   Result.destroy(params['id'])
-  redirect to('/results')
+  redirect to('/entries')
 end

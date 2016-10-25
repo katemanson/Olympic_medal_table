@@ -1,27 +1,23 @@
 <div>
-  <h3>Add result</h3>
+  <h3>Add entry</h3>
 </div>
 <div>
-  <form action="/results" method="post">
+  <form action="/entries" method="post">
     <p>
       <label for="event">Event: </label><br>
       <select name="event_id" id="event">
         <% @events.each do |event| %>
-          <option value="<%= event.id %>"><%= event.sport %>: <%= event.name %></option>
+          <option value="<%= event.id %>"><%= event.sport.name %>: <%= event.name %></option>
         <% end %>
       </select>
     </p>
     <p>
-      <label for="participant">Participant: </label><br>
-      <select name="participant_id" id="participant">
-        <% @participants.each do |participant| %>
-          <option value="<%= participant.id %>"><%= participant.name %></option>
+      <label for="competitor">Competitor: </label><br>
+      <select name="competitor_id" id="competitor">
+        <% @competitors.each do |competitor| %>
+          <option value="<%= competitor.id %>"><%= competitor.name %></option>
         <% end %>
       </select>
-    </p>
-    <p>
-      <label for="result">Result (final position): </label><br>
-      <input type="number" name="result" id="result">
     </p>
     <p>
       <input type="submit" value="Add">

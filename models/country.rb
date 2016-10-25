@@ -15,11 +15,24 @@ class Country
   end
 
   def competitors()
-    sql = "SELECT c.* FROM competitors c
-          INNER JOIN countries ON countries.id = c.country_id
+    sql = "SELECT competitors.* FROM competitors 
+          INNER JOIN countries ON countries.id = competitors.country_id
           WHERE countries.id = #{@id}"
     competitors = Competitor.map_items(sql)
     return competitors
+  end
+
+  def competitors_by_sport()
+    competitors_by_sport = competitors.sort_by { |competitor| competitor.sport.name }
+    return competitors_by_sport
+  end
+
+  def sports_competed_in()
+    sql = "SELECT sports.* FROM sports
+          INNER JOIN events ON sports.id = events.sport_id
+          INNER JOIN entries ON events.id = entries.event_id
+          WHERE 
+          "
   end
 
   def entries()
@@ -58,8 +71,17 @@ class Country
     return all_entries_data
   end
 
-  def results_data()
+  def all_results
     all_results = entries.select { |entry| entry.result != nil }
+    return all_results
+  end
+
+  def all_results_by_sport
+    all_results_by_sport = all_results.sort_by { |entry| entry.sport.name }
+    return all_results_by_sport
+  end
+
+  def results_data()
     all_results_data = all_results.map do |entry|
       {
         sport: entry.sport.name, 

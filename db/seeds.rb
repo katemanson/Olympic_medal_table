@@ -381,5 +381,5 @@ entry45.save()
 # event1.gold_medallist
 
 
-# binding.pry
-# nil
+binding.pry
+nil

@@ -1,3 +1,5 @@
+
+
 !!LIST ENTRIES!!
 <!--   <% @events.each do |event| %>
     <p><b><%= event.sport.name %>: <%= event.name %></b></p>

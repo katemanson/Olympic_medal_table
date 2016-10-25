@@ -25,6 +25,15 @@ class Competitor
     return country
   end
 
+  def sport()
+    sql = "SELECT sports.* FROM sports 
+          INNER JOIN competitors
+          ON sports.id = competitors.sport_id 
+          WHERE competitors.id = #{@id}"
+    sport = Sport.map_item(sql)
+    return sport
+  end
+
   def entries()
     sql = "SELECT e.* FROM entries e
           WHERE e.competitor_id = #{@id}"

@@ -14,6 +14,15 @@ class Sport
     @id = sport['id'].to_i
   end
 
+  def events()
+    sql = "SELECT events.* FROM events 
+          INNER JOIN sports 
+          ON sports.id = events.sport_id 
+          WHERE sports.id = #{@id}"
+    result = Event.map_items(sql)
+    return result
+  end
+
   def competitors()
     sql = "SELECT competitors.* FROM competitors 
           WHERE competitors.sport_id = #{@id}"

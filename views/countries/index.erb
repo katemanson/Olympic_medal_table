@@ -1,11 +1,26 @@
+<h2>Countries</h2>
 <div>
-  <h2>Countries</h2>
+  <p>
+    <form action="/countries/new" method="get">
+      <input type="submit" value="Add country">
+    </form>
+    <hr>
+  </p>
 </div>
 <div>
   <% @countries.each do |country| %>
-  <a href="/countries/<%= country.id %>"><%= country.name %></a><br>
+    <h3>
+      <a href="/countries/<%= country.id %>"><%= country.name %></a>
+    </h3>
+    <p>
+      <a href="/countries/<%= country.id %>/edit">Edit country record</a>
+    </p>
+    <p>
+      <form action="/countries/<%= country.id %>" method="post">
+        <input type="submit" value="Delete all records">
+        <input type="hidden" name="_method" value="delete">
+      </form>
+    </p>
+    <hr>
   <% end %> 
-</div>
-<div>
-  <a href="/countries/new">Add country</a>
 </div>

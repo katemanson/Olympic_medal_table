@@ -1,11 +1,26 @@
+<h2>Sports</h2>
 <div>
-  <h2>Sports</h2>
+  <p>
+    <form action="/sports/new" method="get">
+      <input type="submit" value="Add sport">
+    </form>
+    <hr>
+  </p>
 </div>
 <div>
   <% @sports.each do |sport| %>
-  <a href="/sports/<%= sport.id %>"><%= sport.name %></a><br>
-  <% end %>
-</div>
-<div>
-  <a href="/sports/new">Add sport</a>
+    <h3>
+      <a href="/sports/<%= sport.id %>"><%= sport.name %></a>
+    </h3>
+    <p>
+      <a href="/sports/<%= sport.id %>">Edit sport record</a>
+    </p>
+    <p>
+      <form action="/sports/<%= sport.id %>" method="post">
+        <input type="submit" value="Delete all records">
+        <input type="hidden" name="_method"  value="delete">
+      </form>
+    </p>
+    <hr>
+  <% end %> 
 </div>

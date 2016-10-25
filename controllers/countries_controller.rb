@@ -13,7 +13,7 @@ end
 post '/countries' do
   @country = Country.new(params)
   @country.save()
-  redirect to('/countries') # or erb(:'countries/create')?
+  redirect to('/countries')
 end
 
 #SHOW
@@ -22,12 +22,24 @@ get '/countries/:id' do
   erb(:'countries/show')
 end
 
-#SHOW JSON RESULTS
-get '/countries/:id/results' do
+#SHOW (JSON RESULTS DATA)
+get '/countries/:id/results_data' do
   content_type(:json)
   country = Country.find(params['id'])
   results = country.results_data
   return results.to_json
+end
+
+#SHOW (COMPETITORS BY COUNTRY)
+get '/countries/:id/competitors' do
+  @country = Country.find(params['id'])
+  erb(:'countries/show_competitors')
+end
+
+#SHOW (RESULTS BY COUNTRY)
+get '/countries/:id/results' do
+  @country = Country.find(params['id'])
+  erb(:'countries/show_results')
 end
 
 #EDIT

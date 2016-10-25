@@ -20,7 +20,7 @@
       <% ranking.each do |country, rank| %>
       <tr>
         <td><%= rank %></td>
-        <td><%= country.name %></td>
+        <td><a href="/countries/<%= country.id %>"> <%= country.name %></a></td>
         <td><%= country.number_of_golds %></td>
         <td><%= country.number_of_silvers %></td>
         <td><%= country.number_of_bronzes %></td>

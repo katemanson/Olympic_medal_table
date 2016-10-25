@@ -1,0 +1,18 @@
+<h3>
+  <%= @country.name %>: results
+</h3>
+<p>
+  <a href="/countries/<%= @country.id %>/results_data">Get results data</a>
+</p>
+<hr>
+<div>
+  <p>
+    <% results = @country.all_results_by_sport %>
+    <% results.each do |result| %>
+      <b>Event: </b><%= result.sport.name %>: <%= result.event.name %><br>
+      <b>Competitor: </b><%= result.competitor.name %><br>
+      <b>Final position: </b><%= result.result %><br>
+      <hr>
+    <% end %>
+  </p>
+</div>

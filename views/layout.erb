@@ -3,16 +3,26 @@
   <head>
     <meta charset"utf-8">
     <title>Assignment 1</title>
-    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <nav>
-      <a href="/">Home</a> | <a href="/countries">Countries</a> | <a href="/sports">Sports</a>
+      <div class="go_left">
+        <ul>
+          <li><a href="/">PyeongChang 2018</a></li>
+        </ul>
+      </div>
+      <div class="go_right">
+        <ul>
+          <li><a href="/sports">Sports</a></li>
+          <li><a href="/countries">Countries</a></li>
+          <li><a href="/">Home</a></li>
+        </ul>
+      </div>
     </nav>
     <main>
       <%= yield %>
     </main>
-    <footer>
-    </footer>
+    <footer>PyeongChang 2018</footer>
   </body>
 </html>

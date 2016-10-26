@@ -1,26 +1,30 @@
-<h2>Sports</h2>
-<div>
+<header>
+  <h2>Sports</h2>
+</header>
+<div class="top-button">
   <p>
     <form action="/sports/new" method="get">
       <input type="submit" value="Add sport">
     </form>
-    <hr>
   </p>
 </div>
-<div>
+<div class="flex-container wrap">
   <% @sports.each do |sport| %>
-    <h3>
-      <a href="/sports/<%= sport.id %>"><%= sport.name %></a>
-    </h3>
-    <p>
-      <a href="/sports/<%= sport.id %>">Edit sport</a>
-    </p>
-    <p>
-      <form action="/sports/<%= sport.id %>" method="post">
-        <input type="submit" value="Delete sport">
-        <input type="hidden" name="_method"  value="delete">
-      </form>
-    </p>
-    <hr>
+    <div class="flex-item">
+      <h3>
+        <a href="/sports/<%= sport.id %>"><%= sport.name %></a>
+      </h3>
+      <p>
+        <button>
+          <a href="/sports/<%= sport.id %>">Edit sport</a>
+        </button>
+      </p>
+      <p>
+        <form action="/sports/<%= sport.id %>" method="post">
+          <input type="submit" value="Delete sport">
+          <input type="hidden" name="_method"  value="delete">
+        </form>
+      </p>
+    </div>
   <% end %> 
 </div>

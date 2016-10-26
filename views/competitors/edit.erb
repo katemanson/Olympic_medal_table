@@ -1,10 +1,10 @@
-<h3>
-  Edit competitor
-</h3>
-<div>
+<header>
+  <h3>Edit competitor</h3>
+</header>
+<div class="top-button">
   <form action="/competitors/<%= @competitor.id %>" method="post">
     <p>
-      <label for="country">Country: </label>
+      <label for="sport">Country: </label>
       <select name="country_id" id="country">
         <% @countries.each do |country| %>
           <option value="<%= country.id %>" <%= "selected" if @competitor.country_id == country.id %>><%= country.name %></option>

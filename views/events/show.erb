@@ -1,7 +1,7 @@
-<h3>
-  <%= @event.sport.name %>: <%= @event.name %> 
-</h3>
-<div>
+<header>
+  <h3><%= @event.sport.name %>: <%= @event.name %></h3>
+</header>
+<div class="top-button">
   <% entries = @event.entries %>
   <% raw_results = entries.map { |entry| entry.result } %>
   <% if raw_results.uniq.length == 1 %>
@@ -11,9 +11,10 @@
         <table class="resultstable">
           <tbody>
             <tr>
-              <td><%= entry.competitor.name %></td>
-              <td><%= entry.competitor.country %></td>
-              <td><a href="/entries/<%= entry.id %>/edit">Edit/add result</a></td>
+              <% competitor = entry.competitor %>
+              <td><%= competitor.name %></td>
+              <td><%= competitor.country.name %></td>
+              <td><button><a href="/entries/<%= entry.id %>/edit">Edit entry / record result</a></button></td>
             </tr>
           </tbody>
         </table>
@@ -29,7 +30,7 @@
             <td><%= result.result %></td>
             <td><%= result.competitor.name %></td>
             <td><%= result.competitor.country.name %></td>
-            <td><a href="/entries/<%= result.id %>/edit">Edit</a></td>
+            <td><button><a href="/entries/<%= result.id %>/edit_result">Edit</a></button></td>
           </tr>
         </tbody>
       </table>

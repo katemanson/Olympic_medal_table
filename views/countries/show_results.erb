@@ -1,11 +1,14 @@
-<h3>
-  <%= @country.name %>: results
-</h3>
-<p>
-  <a href="/countries/<%= @country.id %>/results_data">Get results data</a>
-</p>
-<hr>
-<div>
+<header>
+  <h3><%= @country.name %>: Results</h3>
+</header>
+<div class="top-button">
+  <p>
+    <button>
+      <a href="/countries/<%= @country.id %>/results_data">Get results data</a>
+    </button>
+  </p>
+</div>
+<div class="top-button">
   <p>
     <% results = @country.all_results_by_sport %>
     <% results.each do |result| %>

@@ -1,0 +1,34 @@
+<header>
+  <h3>Add entry</h3>
+</header>
+<div class="top-button">
+  <form action="/entries" method="post">
+    <p>
+      Country: <br>
+      <%= @competitor.country.name %>
+    </p>
+    <p>
+      Sport: <br>
+      <%= @sport.name %>
+    </p>
+    <p>
+      <label for="event">Event: </label><br>
+      <select name="event_id" id="event">
+        <% @events.each do |event| %>
+          <option value="<%= event.id %>"><%= event.name %></option>
+        <% end %>
+      </select>
+    </p>
+    <p>
+      <label for="competitor">Competitor: </label><br>
+      <select name="competitor_id" id="competitor">
+        <% @competitors.each do |competitor| %>
+          <option value="<%= competitor.id %>" <%= "selected" if @competitor.id == competitor.id %>><%= competitor.name %></option>
+        <% end %>
+      </select>
+    </p>
+    <p>
+      <input type="submit" value="Add">
+    </p>
+  </form>
+</div>

@@ -5,6 +5,11 @@ html {
   line-height: 1.15; 
   -ms-text-size-adjust: 100%; 
   -webkit-text-size-adjust: 100%; 
+  background: url(/images/AdobeStock_80918652_resave.jpeg) no-repeat center center fixed; 
+  -webkit-background-size: cover;
+  -moz-background-size: cover;
+  -o-background-size: cover;
+  background-size: cover;
 }
 
 
@@ -28,12 +33,20 @@ hr {
 
 a {
   background-color: transparent; 
+  text-decoration: none;
   -webkit-text-decoration-skip: objects; 
 }
 
-a:active,
-a:hover {
+a:link,
+a:visited,
+a:hover,
+a:active {
   outline-width: 0;
+  color: navy;
+}
+
+a:hover {
+  color: rgba(61, 92, 92)
 }
 
 b,
@@ -63,11 +76,16 @@ textarea {
   font-size: 100%; 
   line-height: 1.15; 
   border-radius: 5px;
+  text-decoration: none;
 }
 
 button,
 input { 
   overflow: visible;
+  background-color: rgba(92, 138, 138, 0.6);
+  padding: 10px;
+  color: navy;
+  border: 0px;
 }
 
 button,
@@ -124,7 +142,7 @@ textarea {
 
 /* ________________________________________________________ */
 nav {
-  background-color: lightblue;
+  background-color: rgba(102, 153, 153, 0.3);
   height: 80px;
   width: 100%;
   margin-right: 20px;
@@ -157,21 +175,32 @@ header {
   margin: 20px;
 }
 
+main {
+  margin-bottom: 60px;
+}
+
 footer {
-  background-color: lightblue;
+  background-color: rgba(102, 153, 153, 0.3);
+  position: fixed; bottom:0; left:0;
   width: 100%;
   height: 50px;
   color: navy;
-  line-height: 2.5em;
-  font-size: 20px;
+  line-height: 1.5em;
+  font-size: 16px;
   font-weight: bold;
   padding-left: 20px;
   margin-top: 20px;
 }
 
+footer ul li {
+  list-style-type: none;
+  display: inline-block;
+  margin-right: 70px;
+}
+
 body {
   display: block;
-  margin: 20px;
+  margin: 0px;
   color: navy;
 }
 
@@ -189,6 +218,7 @@ table {
 
 .medaltable {
   display: inline-block;
+  font-size: 1.2em;
 }
 
 .medaltable caption {
@@ -197,22 +227,22 @@ table {
   text-align: left;
   font-size: 0.85em;
   padding: 20px;
-  border: 1px lightgrey;
+  border: 1px navy;
   border-radius: 15px;
 }
 
 .medaltable thead th {
-  border-bottom: 2px solid lightgrey;
+  border-bottom: 2px solid navy;
   padding: 20px;
 }
 
 .medaltable tbody td {
-  border-top: 1px solid lightgrey;
+  border-top: 1px solid navy;
   padding: 20px;
 }
 
 .medaltable tfoot td {
-  border-top: 2px solid lightgrey;
+  border-top: 2px solid navy;
   padding: 20px;
   font-weight: bold;
 }
@@ -230,17 +260,17 @@ table {
 .medaltable th:nth-child(2),
 .medaltable td:nth-child(2) {
   text-align:left;
-  border-right: 2px solid lightgrey;
+  border-right: 2px solid navy;
 }
 
 .medaltable th:nth-child(6),
 .medaltable td:nth-child(6) {
-  border-left: 1px solid lightgrey;
+  border-left: 1px solid navy;
 }
 
 .medaltable th:last-child,
 .medaltable td:last-child {
-  border-left: 2px solid lightgrey;
+  border-left: 2px solid navy;
 }
 
 .medaltable tfoot td:nth-child(2) {
@@ -282,12 +312,12 @@ table {
 }
 
 .flex-item {
-  background: lightblue;
+  background-color: rgba(102, 153, 153, 0.3);
   border-radius: 10px;
   padding: 5px;
   width: 200px;
   height: 200px;
-  margin: 10px;
+  margin: 20px;
   
   line-height: 40px;
   color: white;
@@ -303,6 +333,7 @@ table {
 
 .top-button {
   margin-left: 20px;
+  margin-right: 20px;
 }
 
 

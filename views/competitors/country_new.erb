@@ -4,8 +4,12 @@
 <div class="top-button">
   <form action="/competitors" method="post">
     <p>
-      Country: 
-      <% @country.name %>
+      <label for="country">Country: </label>
+      <select name="country_id" id="country">
+        <% @countries.each do |country| %>
+          <option value="<%= country.id %>" <%= "selected" if @country.id == country.id %>><%= country.name %></option>
+        <% end %>
+      </select>
     </p>
     <p>
       <label for="sport">Sport: </label>
@@ -14,7 +18,8 @@
           <option value="<%= sport.id %>"><%= sport.name %></option>
         <% end %>
       </select>
-    </p>    <p>
+    </p>
+    <p>
       <label for="name">Competitor name: </label>
       <input type="text" name="name" id="name">
     </p>

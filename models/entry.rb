@@ -37,10 +37,10 @@ class Entry
   end
 
   def competitor()
-    sql = "SELECT c.* FROM competitors c
-          INNER JOIN entries e
-          ON e.competitor_id = c.id
-          WHERE e.id = #{@id}"
+    sql = "SELECT competitors.* FROM competitors 
+          INNER JOIN entries 
+          ON entries.competitor_id = competitors.id
+          WHERE entries.id = #{@id}"
     result = Competitor.map_item(sql)
     return result
   end
@@ -90,7 +90,7 @@ class Entry
     sql = "UPDATE entries SET
           competitor_id = #{options['competitor_id']},
           event_id = #{options['event_id']},
-          result = #{options['result']},
+          result = #{options['result']}
           WHERE id = #{options['id']}"
     SqlRunner.run(sql)
   end

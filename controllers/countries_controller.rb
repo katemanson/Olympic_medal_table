@@ -51,7 +51,7 @@ end
 #UPDATE
 put '/countries/:id' do
   @country = Country.update(params)
-  redirect to("/countries/#{params['id']}")
+  redirect to('/countries')
 end
 
 #DELETE

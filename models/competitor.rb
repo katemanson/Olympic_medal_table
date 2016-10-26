@@ -17,9 +17,9 @@ class Competitor
   end
 
   def country()
-    sql = "SELECT c.* FROM countries c 
+    sql = "SELECT countries.* FROM countries 
           INNER JOIN competitors 
-          ON competitors.country_id = c.id
+          ON competitors.country_id = countries.id
           WHERE competitors.id = #{@id}"
     country = Country.map_item(sql)
     return country

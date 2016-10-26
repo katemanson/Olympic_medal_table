@@ -1,26 +1,26 @@
-<h3>
-  <%= @sport.name %>
-</h3>
-<h3>
-  Events
-</h3>
-<div>
+<header>
+  <h3>
+    <%= @sport.name %> Events
+  </h3>
+</header>
+<div class="top-button">
   <p>
     <form action="/events/new" method="get">
       <input type="submit" value="Add event">
     </form>
-    <hr>
   </p>
 </div>
-<div>
-  <p>
-    <% events = @sport.events %>
-    <% events.each do |event| %>
+<div class="flex-container wrap">
+  <% events = @sport.events %>
+  <% events.each do |event| %>
+    <div class="flex-item">
       <h3>
         <a href="/events/<%= event.id %>"><%= event.name %></a>
       </h3>
       <p>
-        <a href="/events/<%= event.id %>/edit">Edit event</a>
+        <button>
+          <a href="/events/<%= event.id %>/edit">Edit event</a>
+        </button>
       </p>
       <p>
         <form action="/events/<%= event.id %>" method="post">
@@ -28,6 +28,6 @@
           <input type="hidden" name="_method" value="delete">
         </form>
       </p>
-      <hr>
-    <% end %>
+    </div>
+  <% end %>
 </div>

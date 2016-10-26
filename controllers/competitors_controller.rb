@@ -4,18 +4,20 @@ get '/competitors' do
   erb(:'competitors/index')
 end
 
-# NEW
-get '/competitors/new' do
+# NEW FROM COUNTRY RECORD
+get '/competitors/country/:id/new' do
   @countries = Country.all()
+  @country = Country.find(params['id'])
   @sports = Sport.all()
-  erb(:'competitors/new')
+  erb(:'competitors/country_new')
 end
 
 # CREATE
 post '/competitors' do
   @competitor = Competitor.new(params)
   @competitor.save
-  redirect to('/competitors')
+  country = @competitor.country_id
+  redirect to("/countries/#{country}/competitors")
 end
 
 # SHOW
@@ -35,11 +37,15 @@ end
 # UPDATE
 put '/competitors/:id' do
   @competitor = Competitor.update(params)
-  redirect to("/competitors/#{params['id']}")
+  competitor = Competitor.find(params['id'])
+  country = competitor.country_id
+  redirect to("/countries/#{country}/competitors")
 end
 
 # DELETE
 delete '/competitors/:id' do
+  competitor = Competitor.find(params['id'])
+  country = competitor.country_id
   Competitor.destroy(params['id'])
-  redirect to('/competitors')
+  redirect to("/countries/#{country}/competitors")
 end

@@ -167,13 +167,19 @@ class Country
       [country_data[0], index + 1]
     end
 
-    final_ranking = [raw_ranking[0]]
+    final_ranking = [[raw_ranking[0][0], raw_ranking[0][1].to_s]]
 
-    raw_ranking.each_cons(2) do |previous, current| 
-      if (previous[0].total_ranking_points == current[0].total_ranking_points) && (previous[0].total_number_of_medals == current[0].total_number_of_medals)
-        final_ranking.delete_at(-1)
-        final_ranking << [previous[0], previous[1].to_s + '=']
-        final_ranking << [current[0], previous[1].to_s + '=']
+    raw_ranking.each_cons(2) do |previous, current|
+      # are points and medals equal, and does last entry in final_ranking already have an = sign? If so, use same final ranking again
+      #does last entry in final_ranking have an = sign?
+      if (previous[0].total_ranking_points == current[0].total_ranking_points) && (previous[0].total_number_of_medals == current[0].total_number_of_medals) && final_ranking[-1][1].include?('=') 
+          final_ranking << [current[0], final_ranking[-1][1]]
+      # are points and medals equal (without last entry in final_ranking already being equal to the one before)? If so, use same ranking as previous. 
+      elsif (previous[0].total_ranking_points == current[0].total_ranking_points) && (previous[0].total_number_of_medals == current[0].total_number_of_medals)
+          final_ranking.delete_at(-1)
+          final_ranking << [previous[0], previous[1].to_s + '=']
+          final_ranking << [current[0], previous[1].to_s + '=']
+      # otherwise, stick with current ranking
       else
         final_ranking << [current[0],current[1].to_s]
       end

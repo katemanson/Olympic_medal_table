@@ -18,8 +18,8 @@ In this example, Austria and Germany are equal on points, but Austria has more m
 * Ruby models, views and controllers; also runners/utilities
 * Views use embedded Ruby (ERB)
 * Sinatra web framework
-* Debugged with ![pry-byebug](https://rubygems.org/gems/pry-byebug/)
-* Stylesheet includes an adapted ![Normalize.css](https://necolas.github.io/normalize.css/) reset, and implements a flexbox layout
+* Debugged with [pry-byebug](https://rubygems.org/gems/pry-byebug/)
+* Stylesheet includes an adapted [Normalize.css](https://necolas.github.io/normalize.css/) reset, and implements a flexbox layout
 
 ![countries](https://github.com/katemanson/Olympic_medal_table/raw/master/img/countries.png)
 
@@ -74,10 +74,10 @@ end
 ##Next steps would be...
 * Include non-results such as DNS, DNF, DQ (perhaps by encoding them as negative ranking numbers)
 * Include athletes (as individuals) in a separate class
-* In general, work towards ![this kind](http://www.bbc.co.uk/sport/olympics/rio-2016/medals/countries) of functionality. 
+* In general, work towards [this kind](http://www.bbc.co.uk/sport/olympics/rio-2016/medals/countries) of functionality. 
 
 ##To run
-* If you need to, check you have Ruby installed by typing `ruby -v` into your terminal. If this returns the version information, you're fine. If not, you can use the ![installation page in the Ruby documentation](https://www.ruby-lang.org/en/documentation/installation/) to get it  
+* If you need to, check you have Ruby installed by typing `ruby -v` into your terminal. If this returns the version information, you're fine. If not, you can use the [installation page in the Ruby documentation](https://www.ruby-lang.org/en/documentation/installation/) to get it  
 * Download or clone this repository
 * Install Sinatra (assuming you don't have it already) with `gem install sinatra`
 * Run with `ruby main_controller.rb`

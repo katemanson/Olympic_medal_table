@@ -1,12 +1,30 @@
-<div>
+<header>
   <h2>Countries</h2>
+</header>
+<div class="top-button">
+  <p>
+    <form action="/countries/new" method="get">
+      <input type="submit" value="Add country">
+    </form>
+  </p>
 </div>
-<div>
-  <% @countries.each do |country| %>
-  <a href="/countries/<%= country.id %>"><%= country.name %></a><br>
-  <% end %> 
-</div>
-<p></p>
-<div>
-  <a href="/countries/new">Add country</a>
+<div class="flex-container wrap">
+    <% @countries.each do |country| %>
+      <div class="flex-item">
+        <h3>
+          <a href="/countries/<%= country.id %>"><%= country.name %></a>
+        </h3>
+        <p>
+          <button>
+            <a href="/countries/<%= country.id %>/edit" target="edit_country">Edit</a>
+          </button>
+        </p>
+        <p>
+          <form action="/countries/<%= country.id %>" method="post">
+            <input type="submit" value="Delete">
+            <input type="hidden" name="_method" value="delete">
+          </form>
+        </p>
+      </div>
+  <% end %>
 </div>

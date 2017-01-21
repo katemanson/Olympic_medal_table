@@ -14,48 +14,98 @@ class Country
     @id = country['id'].to_i
   end
 
-  def participants()
-    sql = "SELECT p.* FROM participants p
-          INNER JOIN countries c ON c.id = p.country_id
-          WHERE c.id = #{@id}"
-    participants = Participant.map_items(sql)
-    return participants
+  def competitors()
+    sql = "SELECT competitors.* FROM competitors 
+          INNER JOIN countries ON countries.id = competitors.country_id
+          WHERE countries.id = #{@id}"
+    competitors = Competitor.map_items(sql)
+    return competitors
   end
 
-  def results()
-    sql = "SELECT r.* FROM results r
-          INNER JOIN participants p ON p.id = r.participant_id
-          INNER JOIN countries c ON c.id = p.country_id
-          WHERE c.id = #{@id}"
-    results = Result.map_items(sql)
-    return results
+  def competitors_by_sport()
+    competitors_by_sport = competitors.sort_by { |competitor| competitor.sport.name }
+    return competitors_by_sport
   end
 
-  def show_results()
-    all_results = results.map do |result|
+  def sports_competed_in()
+    sql = "SELECT sports.* FROM sports
+          INNER JOIN events ON sports.id = events.sport_id
+          INNER JOIN entries ON events.id = entries.event_id
+          WHERE 
+          "
+  end
+
+  def entries()
+    sql = "SELECT entries.* FROM entries 
+          INNER JOIN competitors ON competitors.id = entries.competitor_id
+          INNER JOIN countries ON countries.id = competitors.country_id
+          WHERE countries.id = #{@id}"
+    entries = Entry.map_items(sql)
+    return entries
+  end
+
+  def entries_data()
+    all_entries_data = entries.map do |entry|
       {
-        sport: result.event.sport, 
-        event: result.event.name,
-        participant: result.participant.name, 
-        final_position: result.result,
-        medal: case result.result
-        when 1
-          "Gold"
-        when 2
-          "Silver"
-        when 3
-          "Bronze"
-        else
-          "no"
-        end
+        sport: entry.event.sport, 
+        event: entry.event.name,
+        competitor: entry.competitor.name, 
+        final_position: 
+          if entry.result == nil
+            "Not determined"
+          else
+            entry.result
+          end,
+        medal:  case entry.result
+                when 1
+                  "Gold"
+                when 2
+                  "Silver"
+                when 3
+                  "Bronze"
+                else
+                  "None"
+                end
       }
     end
+    return all_entries_data
+  end
+
+  def all_results
+    all_results = entries.select { |entry| entry.result != nil }
     return all_results
   end
 
+  def all_results_by_sport
+    all_results_by_sport = all_results.sort_by { |entry| entry.sport.name }
+    return all_results_by_sport
+  end
+
+  def results_data()
+    all_results_data = all_results.map do |entry|
+      {
+        sport: entry.sport.name, 
+        event: entry.event.name,
+        competitor: entry.competitor.name, 
+        final_position: entry.result,
+        medal:  case entry.result
+                when 1
+                  "Gold"
+                when 2
+                  "Silver"
+                when 3
+                  "Bronze"
+                else
+                  "None"
+                end
+      }
+    end
+    return all_results_data
+  end
+
   def golds()
-      gold_results = results.select { |result| result.result == 1 }
-      return gold_results
+      entries_with_gold_result = entries.select { |entry| entry.result == 1 }
+      return entries_with_gold_result
   end
 
   def number_of_golds()
@@ -63,8 +113,8 @@ class Country
   end
 
   def silvers()
-    silver_results = results.select { |result| result.result == 2 }
-    return silver_results
+    entries_with_silver_result = entries.select { |entry| entry.result == 2 }
+    return entries_with_silver_result
   end
 
   def number_of_silvers()
@@ -72,8 +122,8 @@ class Country
   end
 
   def bronzes()
-    bronze_results = results.select { |result| result.result == 3 }
-    return bronze_results
+    entries_with_bronze_result = entries.select { |entry| entry.result == 3 }
+    return entries_with_bronze_result
   end
 
   def number_of_bronzes()
@@ -117,13 +167,19 @@ class Country
       [country_data[0], index + 1]
     end
 
-    final_ranking = [raw_ranking[0]]
+    final_ranking = [[raw_ranking[0][0], raw_ranking[0][1].to_s]]
 
-    raw_ranking.each_cons(2) do |previous, current| 
-      if (previous[0].total_ranking_points + previous[0].total_number_of_medals) == (current[0].total_ranking_points + current[0].total_number_of_medals)
-        final_ranking.delete_at(-1)
-        final_ranking << [previous[0], previous[1].to_s + '=']
-        final_ranking << [current[0], previous[1].to_s + '=']
+    raw_ranking.each_cons(2) do |previous, current|
+      # are points and medals equal, and does last entry in final_ranking already have an = sign? If so, use same final ranking again
+      #does last entry in final_ranking have an = sign?
+      if (previous[0].total_ranking_points == current[0].total_ranking_points) && (previous[0].total_number_of_medals == current[0].total_number_of_medals) && final_ranking[-1][1].include?('=') 
+          final_ranking << [current[0], final_ranking[-1][1]]
+      # are points and medals equal (without last entry in final_ranking already being equal to the one before)? If so, use same ranking as previous. 
+      elsif (previous[0].total_ranking_points == current[0].total_ranking_points) && (previous[0].total_number_of_medals == current[0].total_number_of_medals)
+          final_ranking.delete_at(-1)
+          final_ranking << [previous[0], previous[1].to_s + '=']
+          final_ranking << [current[0], previous[1].to_s + '=']
+      # otherwise, stick with current ranking
       else
         final_ranking << [current[0],current[1].to_s]
       end

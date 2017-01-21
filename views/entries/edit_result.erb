@@ -1,0 +1,31 @@
+<header>
+  <h3>Edit result</h3>
+</header>
+<div class="top-button">
+  <form action="/entries/<%= @entry.id %>" method="post">
+    <p>
+      <label for="event">Event: </label><br>
+      <select name="event_id" id="event">
+        <% @events.each do |event| %>
+          <option value="<%= event.id %>" <%= "selected" if @entry.event_id == event.id %>><%= event.sport.name %>: <%= event.name %></option>
+        <% end %>
+      </select>
+    </p>
+    <p>
+      <label for="competitor">Competitor: </label><br>
+      <select name="competitor_id" id="competitor">
+        <% @competitors.each do |competitor| %>
+          <option value="<%= competitor.id %>" <%= "selected" if @entry.competitor_id == competitor.id %>><%= competitor.name %></option>
+        <% end %>
+      </select>
+    </p>
+    <p>
+      <label for="result">Result (final position): </label><br>
+      <input type="number" name="result" id="result" value="<%= @entry.result %>">
+    </p>
+    <p>
+      <input type="hidden" name="_method" value="put">
+      <input type="submit" value="Save">
+    </p>
+  </form>
+</div>

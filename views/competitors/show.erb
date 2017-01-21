@@ -1,0 +1,43 @@
+<h3>
+  <%= @competitor.name %><br>
+  <%= @competitor.country.name %><br>
+  <%= @competitor.sport.name %>
+</h3>
+<div>
+  <p>
+    <a href="/competitors/<%= @competitor.id %>/edit">Edit competitor</a>
+  </p>
+  <p>
+    <form action="/competitors/<%= @competitor.id %>" method="post">
+      <input type="submit" value="Delete competitor">
+      <input type="hidden" name="_method" value="delete">
+    </form>
+  </p>
+</div>
+<div>
+  <p>
+    <b>Events: </b>
+  </p>
+  <p>
+    <% @competitor.entries.each do |entry| %>
+      <p>
+        <b><%= entry.sport.name %>: <%= entry.event.name %></b><br>
+        <% if entry.result != 0 %>
+          Result (final ranking): <%= entry.result %><br>
+          <a href="/entries/<%= entry.id %>/edit">Edit result</a>
+      </p>
+        <% else %>
+      <p>
+          <a href="/entries/<%= entry.id %>/edit">Edit entry</a><br>
+          <form action="/entries/<%= entry.id %>" method="post">
+            <input type="submit" value="Delete entry">
+            <input type="hidden" name="_method" value="delete">
+          </form>
+      </p>
+          <% end %>
+    <% end %>
+  </p>
+  <p>
+    <a href="/entries/new">Add entry</a>
+  </p>
+</div>

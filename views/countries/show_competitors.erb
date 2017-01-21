@@ -1,0 +1,54 @@
+<header>
+  <h3><%= @country.name %>: Competitors</h3>
+</header>
+<div class="top-button">
+  <p>
+    <form action="/competitors/country/<%= @country.id %>/new" method="get">
+      <input type="submit" value="Add competitor">
+    </form>
+    <hr>
+  </p>
+</div>
+<div class="top-button">
+  <p>
+    <% competitors = @country.competitors.sort_by { |competitor| competitor.sport.name } %>
+    <% competitors.each do |competitor| %>
+      <b>Competitor: </b><%= competitor.name %><br>
+      <b>Sport: </b><%= competitor.sport.name %><br>
+      <b>Events: </b>
+        <% competitor.entries.each do |entry| %>
+        <%= entry.event.name %><br>
+          <% if entry.result != 0 %>
+            <b>Result (final position): </b><%= entry.result %><br>
+          <% else %>
+            <p>
+              <button>
+                <a href="/entries/<%= entry.id %>/edit">Edit entry</a>
+              </button>
+            </p>
+            <p>
+              <form action="/entries/<%= entry.id %>" method="post">
+                <input type="submit" value="Delete entry">
+                <input type="hidden" name="_method" value="delete">
+              </form>
+            </p>
+          <% end %>
+        <% end %>
+  </p>
+      <p>
+        <button>
+          <a href="/entries/competitor/<%= competitor.id %>/new_entry">Add entry</a>
+        </button>
+      </p>
+      <p>
+        <button>
+          <a href="/competitors/<%= competitor.id %>/edit">Edit competitor</a>
+        </button>
+        <form action="/competitors/<%= competitor.id %>" method="post">
+          <input type="submit" value="Delete competitor">
+          <input type="hidden" name="_method" value="delete">
+        </form>        
+      </p>
+    <hr>
+    <% end %>
+</div>

@@ -1,12 +1,39 @@
-<div>
-  <h3> <%= @event.sport %> </h3>
-  <h4> <%= @event.name %> </h4>
-  Countries | Participants | Results
-</div>
-<div>
-  <p><a href="/events/<%= @event.id %>/edit">Edit</a></p>
-  <p><form action="/events/<%= @event.id %>" method="post">
-    <input type="submit" value="Delete">
-    <input type="hidden" name="_method"  value="delete">
-  </form></p>
+<header>
+  <h3><%= @event.sport.name %>: <%= @event.name %></h3>
+</header>
+<div class="top-button">
+  <% entries = @event.entries %>
+  <% raw_results = entries.map { |entry| entry.result } %>
+  <% if raw_results.uniq.length == 1 %>
+  <h4>Entries</h4>
+    <p>
+      <% entries.each do |entry| %>
+        <table class="resultstable">
+          <tbody>
+            <tr>
+              <% competitor = entry.competitor %>
+              <td><%= competitor.name %></td>
+              <td><%= competitor.country.name %></td>
+              <td><button><a href="/entries/<%= entry.id %>/edit">Edit entry / record result</a></button></td>
+            </tr>
+          </tbody>
+        </table>
+      <% end %>
+    </p>
+  <% else %>
+  <h4>Results</h4>
+    <% results = entries.sort_by { |entry| entry.result } %>
+    <% results.each do |result| %>
+      <table class="resultstable">
+        <tbody>
+          <tr>
+            <td><%= result.result %></td>
+            <td><%= result.competitor.name %></td>
+            <td><%= result.competitor.country.name %></td>
+            <td><button><a href="/entries/<%= result.id %>/edit_result">Edit</a></button></td>
+          </tr>
+        </tbody>
+      </table>
+    <% end %>
+  <% end %>
 </div>

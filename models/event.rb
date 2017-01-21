@@ -1,55 +1,62 @@
 class Event
 
   attr_reader :id
-  attr_accessor :name, :sport
+  attr_accessor :name, :sport_id
 
   def initialize(options)
     @id = nil || options['id'].to_i
+    @sport_id = options['sport_id'].to_i
     @name = options['name']
-    @sport = options['sport']
   end
 
   def save()
-    sql = "INSERT INTO events (name, sport) VALUES ('#{@name}', '#{@sport}') RETURNING *"
+    sql = "INSERT INTO events (name, sport_id) VALUES ('#{@name}', '#{@sport_id}') RETURNING *"
     event = SqlRunner.run(sql).first
     @id = event['id'].to_i
   end
 
-  def participants()
-    sql = "SELECT p.* FROM participants p 
-          INNER JOIN results r 
-          ON p.id = r.participant_id 
-          INNER JOIN events e 
-          ON r.event_id = e.id 
-          WHERE e.id = #{@id}"
-    result = Result.map_items(sql)
+  def sport()
+    sql = "SELECT sports.* FROM sports 
+          WHERE sports.id = #{@sport_id}"
+    result = Sport.map_item(sql)
     return result
   end
 
-  def results
-    sql = "SELECT r.* FROM results r
-          INNER JOIN events e 
-          ON e.id = r.event_id
-          WHERE e.id = #{@id}"
-    result = Result.map_items(sql)
+  def competitors()
+    sql = "SELECT competitors.* FROM competitors 
+          INNER JOIN entries 
+          ON competitors.id = entries.competitor_id 
+          INNER JOIN events 
+          ON entries.event_id = events.id 
+          WHERE events.id = #{@id}"
+    result = Event.map_items(sql)
+    return result
+  end
+
+  def entries
+    sql = "SELECT entries.* FROM entries 
+          INNER JOIN events 
+          ON events.id = entries.event_id
+          WHERE events.id = #{@id}"
+    result = Entry.map_items(sql)
     return result
   end
 
   def gold_medallist
-    gold_result = results.find { |result| result.result == 1 }
-    gold_medallist = Participant.find(gold_result.participant_id)
+    gold_entry = entries.find { |entry| entry.result == 1 }
+    gold_medallist = Competitor.find(gold_entry.competitor_id)
     return gold_medallist
   end
 
   def silver_medallist
-    silver_result = results.find { |result| result.result == 2 }
-    silver_medallist = Participant.find(silver_result.participant_id)
+    silver_entry = entries.find { |entry| entry.result == 2 }
+    silver_medallist = Competitor.find(silver_entry.competitor_id)
     return silver_medallist
   end
 
   def bronze_medallist
-    bronze_result = results.find { |result| result.result == 3 }
-    bronze_medallist = Participant.find(bronze_result.participant_id)
+    bronze_entry = entries.find { |entry| entry.result == 3 }
+    bronze_medallist = Competitor.find(bronze_entry.competitor_id)
     return bronze_medallist
   end
 
@@ -62,7 +69,7 @@ class Event
   def self.update(options)
     sql = "UPDATE events SET
           name = '#{options['name']}',
-          sport = '#{options['sport']}'
+          sport_id = '#{options['sport_id']}'
           WHERE id = #{options['id']}"
     SqlRunner.run(sql)
   end

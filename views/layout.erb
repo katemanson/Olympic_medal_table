@@ -2,12 +2,23 @@
 <html lang="en">
   <head>
     <meta charset"utf-8">
-    <title>CodeClan Ass1</title>
-    <link rel="stylesheet" href="style.css">
+    <title>Assignment 1</title>
+    <link rel="stylesheet" href="/style.css">
   </head>
   <body>
     <nav>
-      <a href="/">Home</a> | <a href="/countries">Countries</a> | <a href="/events">Events</a> | <a href="/participants">Participants</a> | <a href="/results">Results</a>
+      <div class="go_left">
+        <ul>
+          <li><a href="/">PyeongChang 2018</a></li>
+        </ul>
+      </div>
+      <div class="go_right">
+        <ul>
+          <li><a href="/sports">Sports</a></li>
+          <li><a href="/countries">Countries</a></li>
+          <li><a href="/">Home</a></li>
+        </ul>
+      </div>
     </nav>
     <main>
       <%= yield %>

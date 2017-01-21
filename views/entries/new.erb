@@ -1,0 +1,26 @@
+<div>
+  <h3>Add entry</h3>
+</div>
+<div>
+  <form action="/entries" method="post">
+    <p>
+      <label for="event">Event: </label><br>
+      <select name="event_id" id="event">
+        <% @events.each do |event| %>
+          <option value="<%= event.id %>"><%= event.sport.name %>: <%= event.name %></option>
+        <% end %>
+      </select>
+    </p>
+    <p>
+      <label for="competitor">Competitor: </label><br>
+      <select name="competitor_id" id="competitor">
+        <% @competitors.each do |competitor| %>
+          <option value="<%= competitor.id %>"><%= competitor.name %></option>
+        <% end %>
+      </select>
+    </p>
+    <p>
+      <input type="submit" value="Add">
+    </p>
+  </form>
+</div>

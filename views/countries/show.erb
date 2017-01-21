@@ -1,11 +1,16 @@
-<div>
-  <h3> <%= @country.name %> </h3>
-  Participants | Events | Results | <a href="/countries/<%= @country.id %>/results">Results data</a>
-</div>
-<div>
-  <p><a href="/countries/<%= @country.id %>/edit">Edit</a></p>
-  <p><form action="/countries/<%= @country.id %>" method="post">
-    <input type="submit" value="Delete">
-    <input type="hidden" name="_method"  value="delete">
-  </form></p>
+<header>
+  <h3>
+    <%= @country.name %>
+  </h3>
+</header>
+<div class="top-button">
+  <p>
+    <a href="/countries/<%= @country.id %>/competitors">Competitors and entries</a>
+  </p>
+  <p>
+    <a href="/countries/<%= @country.id %>/results">View results</a>
+  </p>
+  <p>
+    <a href="/countries/<%= @country.id %>/results_data">Get results data</a>
+  </p>
 </div>

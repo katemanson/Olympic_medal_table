@@ -2,9 +2,9 @@
 
 #How it works
 A table that updates as results are recorded: 
-* The database includes tables for countries, competitors, sports, events and entries. 
-* As events are completed, the entries table can be updated to include a result for each entry. 
-* When the medal table is displayed, the results data are used to calculate a ranking for each country, based first on a points system (5 for gold, 3 for silver, 1 for bronze), then on overall number of medals. 
+* The database includes tables for countries, competitors, sports, events and entries 
+* As events are completed, the entries table can be updated to include a result for each entry 
+* When the medal table is displayed, the results data are used to calculate a ranking for each country, based first on a points system (5 for gold, 3 for silver, 1 for bronze), then on overall number of medals 
 * If two or more countries are equal on both measures, they are given the same ranking, and the relevant number of subsequent rankings skipped. 
 
 In this example, Austria and Germany are equal on points, but Austria has more medals overall and is therefore ranked higher. Australia and Norway, on the other hand, are equal on both points and number of medals. They are ranked equal seventh, and eighth is skipped: 
@@ -19,7 +19,7 @@ In this example, Austria and Germany are equal on points, but Austria has more m
 * Views use embedded Ruby (ERB)
 * Sinatra web framework
 * Debugged with [pry-byebug](https://rubygems.org/gems/pry-byebug/)
-* Stylesheet includes an adapted [Normalize.css](https://necolas.github.io/normalize.css/) reset, and implements a flexbox layout
+* Stylesheet includes an adapted [Normalize.css](https://necolas.github.io/normalize.css/) reset, and implements a flexbox layout:
 
 ![countries](https://github.com/katemanson/Olympic_medal_table/raw/master/img/countries.png)
 
@@ -68,7 +68,7 @@ end
 ```
 
 ##Learning points
-* The table is slow to load; this is because the functions called in the Country.rank_all() method in turn prompt a series of database queries. These could be reduced by refactoring to include relevant data in the program state; that is, by using Ruby before SQL. 
+* The table is slow to load; this is because the functions called in the Country.rank_all() method in turn prompt a series of database queries. These could be reduced by refactoring to include relevant data in the program state; that is, by using Ruby before SQL 
 * Need to `git commit` more often. 
 
 ##Next steps would be...

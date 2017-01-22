@@ -80,9 +80,9 @@ end
 * In general, work towards [this kind](http://www.bbc.co.uk/sport/olympics/rio-2016/medals/countries) of functionality. 
 
 ##To run it
-* If you need to, check you have Ruby installed by entering `ruby -v` in your terminal. If this returns  version information, you're fine. If not, you can use the [installation page in the Ruby documentation](https://www.ruby-lang.org/en/documentation/installation/) to get it.  
-* Download or clone this repository.
-* Install Sinatra (assuming you don't have it already) with `gem install sinatra`.
-* Run the app with `ruby main_controller.rb`.
+* If you need to, check you have Ruby installed by entering `ruby -v` in your terminal. If this returns  version information, you're fine. If not, you can use the [installation page in the Ruby documentation](https://www.ruby-lang.org/en/documentation/installation/) to get it
+* Download or clone this repository
+* Install Sinatra (assuming you don't have it already) with `gem install sinatra`
+* Run the app with `ruby main_controller.rb`
 * In your browser, visit http://localhost:4567
 

@@ -1,11 +1,11 @@
 #Olympic medal table
 
 ##Summary
-This was an individual project carried out in Week 5 of the 16-week immersive coding course at [CodeClan](https://codeclan.com/). 
+This was an individual project carried out in Week 5 of the immersive coding course at [CodeClan](https://codeclan.com/). 
 
 The brief was to create a medal table app (for the next Winter Olympics) that updates as results are recorded. 
 
-How it works:
+###How it works
 * The database includes tables for countries, competitors, sports, events and entries. 
 * As events are completed, the entries table can be updated to include a result for each entry. 
 * When the medal table is displayed, the results data are used to calculate a ranking for each country, based first on a points system (5 for gold, 3 for silver, 1 for bronze), then on overall number of medals. 
@@ -15,7 +15,7 @@ In this example, Austria and Germany are equal on points, but Austria has more m
 
 ![medal table](https://github.com/katemanson/Olympic_medal_table/raw/master/img/medal_table.png)
 
-##Technical stuff
+##Technical notes
 * Follows OO principles
 * RESTful design pattern
 * PostgreSQL database
@@ -79,7 +79,7 @@ end
 * Include athletes (as individuals) in a separate class.
 * In general, work towards [this kind](http://www.bbc.co.uk/sport/olympics/rio-2016/medals/countries) of functionality. 
 
-##To run
+##To run it
 * If you need to, check you have Ruby installed by entering `ruby -v` in your terminal. If this returns  version information, you're fine. If not, you can use the [installation page in the Ruby documentation](https://www.ruby-lang.org/en/documentation/installation/) to get it.  
 * Download or clone this repository.
 * Install Sinatra (assuming you don't have it already) with `gem install sinatra`.
